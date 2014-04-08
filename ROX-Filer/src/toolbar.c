@@ -31,6 +31,7 @@
 #include "toolbar.h"
 #include "options.h"
 #include "support.h"
+#define _TOOLBAR
 #include "main.h"
 #include "menu.h"
 #include "dnd.h"
