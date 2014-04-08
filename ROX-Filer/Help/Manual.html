@@ -1,0 +1,2369 @@
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><link rel="stylesheet" href="../style.css" type="text/css" media="all"><title>
+   ROX-Filer User Manual
+   
+  </title></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" id="id2781138"><div class="chapter"><div class="titlepage"><div><h1 class="title"><a name="id2781138"></a>
+   ROX-Filer User Manual
+   <a href="http://rox.sourceforge.net" target="_top">http://rox.sourceforge.net</a>
+  </h1></div><div><h3 class="author">Thomas Leonard</h3><div class="affiliation"><div class="address"><tt>&lt;<a href="mailto:tal197@users.sourceforge.net">tal197@users.sourceforge.net</a>&gt;</tt></div></div></div><div><p class="copyright">Copyright © 2002 Thomas Leonard</p></div><div><div class="legalnotice"><p class="legalnotice-title"><b>Conditions</b></p><p>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published
+    by the Free Software Foundation; either version 2 of the License,
+    or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+    for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software Foundation,
+    Inc., 59 Temple Place, Suite 330, Boston, MA, 02111-1307, USA.
+   </p></div></div><div><div class="abstract"><p><a name="id2768110"></a><b>Abstract</b></p><p>
+    ROX-Filer is a graphical file manger for the X
+    Window System. Its user interface is based on the RISC OS filer and it
+    supports similar features such as application directories and drag-and-drop
+    loading and saving of files. The filer can also act as a pinboard, allowing
+    you to pin frequently used files onto the desktop background.
+   </p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1 <a href="#intro">Introduction</a></dt><dd><dl><dt> <a href="#id2721890">Features</a></dt></dl></dd><dt>2 <a href="#compiling">Compiling</a></dt><dt>3 <a href="#invoking">Invoking</a></dt><dd><dl><dt> <a href="#id2721762">Pinboard support</a></dt><dt> <a href="#id2722343">Panels</a></dt><dt> <a href="#id2721613">Window manager notes</a></dt><dd><dl><dt> <a href="#id2721830">Sawfish / sawmill</a></dt><dt> <a href="#id2721859">IceWM</a></dt><dt> <a href="#id2722102">Window Maker</a></dt><dt> <a href="#id2718178">Others</a></dt></dl></dd><dt> <a href="#id2718205">Running as root</a></dt></dl></dd><dt>4 <a href="#keys">Mouse button and key bindings</a></dt><dt>5 <a href="#selection">The selection and file groups</a></dt><dd><dl><dt> <a href="#id2718736">Saving and restoring the selection</a></dt></dl></dd><dt>6 <a href="#toolbar">The toolbar</a></dt><dt>7 <a href="#menus">The menus</a></dt><dd><dl><dt> <a href="#id2719183">The display menu</a></dt><dd><dl><dt> <a href="#id2781348">
+     Permissions
+    </a></dt></dl></dd><dt> <a href="#id2781557">The file menu</a></dt><dt> <a href="#id2781938">The select menu</a></dt><dt> <a href="#id2782047">The new menu</a></dt><dt> <a href="#id2782158">The window menu</a></dt><dt> <a href="#id2782346">The send to menu</a></dt></dl></dd><dt>8 <a href="#icons">The pinboard and panels</a></dt><dd><dl><dt> <a href="#id2782497">The pinboard and panel menus</a></dt><dt> <a href="#id2782639">Panel applets</a></dt></dl></dd><dt>9 <a href="#virtual">
+   Virtual file systems
+  </a></dt><dt>10 <a href="#minibuffer">The mini-buffer</a></dt><dd><dl><dt> <a href="#id2782929">The path-entry box</a></dt><dt> <a href="#id2783137">The shell command box</a></dt><dt> <a href="#id2783400">The conditional
+    selection box</a></dt></dl></dd><dt>11 <a href="#actions">Action windows</a></dt><dd><dl><dt> <a href="#id2783638">Action window options</a></dt></dl></dd><dt>12 <a href="#searching">Searching</a></dt><dd><dl><dt> <a href="#id2783776">Wildcards</a></dt><dt> <a href="#id2783882">Simple tests</a></dt><dt> <a href="#id2784161">Logic operators</a></dt><dt> <a href="#id2784235">Comparisons</a></dt><dt> <a href="#id2784667">Specials</a></dt></dl></dd><dt>13 <a href="#options">Options</a></dt><dd><dl><dt> <a href="#id2784957">Translation options</a></dt><dt> <a href="#id2784972">Display options</a></dt><dt> <a href="#id2785100">Pinboard options</a></dt><dt> <a href="#id2785200">Panel options</a></dt><dt> <a href="#id2785223">Action window options</a></dt><dt> <a href="#id2785247">Toolbar options</a></dt><dt> <a href="#id2785344">Filer window options</a></dt><dt> <a href="#id2785523">Drag-And-Drop options</a></dt><dt> <a href="#id2718050">Menu options</a></dt><dt> <a href="#id2785923">Types</a></dt></dl></dd><dt>14 <a href="#types">Filetypes</a></dt><dd><dl><dt> <a href="#id2786075">
+    The run action box
+   </a></dt><dd><dl><dt> <a href="#id2786132">Setting the run action by drag-and-drop</a></dt><dt> <a href="#id2786154">Setting the run action by entering a shell command</a></dt><dt> <a href="#id2786197">Setting the default media-type handlers</a></dt></dl></dd><dt> <a href="#id2786231">
+    The Set Icon box
+   </a></dt><dt> <a href="#id2786279">How filetypes are stored</a></dt></dl></dd><dt>15 <a href="#appdirs">
+   Application directories
+  </a></dt><dd><dl><dt> <a href="#id2786689">The AppInfo file</a></dt></dl></dd><dt>16 <a href="#i18n">Internationalisation</a></dt><dd><dl><dt> <a href="#id2786806">
+    Selecting a translation
+   </a></dt><dt> <a href="#id2786871">Creating a new translation</a></dt><dt> <a href="#id2787043">Updating an existing translation</a></dt></dl></dd><dt>17 <a href="#hacking">Hacking</a></dt><dd><dl><dt> <a href="#id2787172">Compiling</a></dt><dt> <a href="#id2787228">Creating and applying patches</a></dt><dt> <a href="#id2787334">Autoconf</a></dt><dt> <a href="#id2787475">Data-structures</a></dt></dl></dd><dt>A <a href="#manpage">Manual page</a></dt><dt>B <a href="#soap">SOAP RPC</a></dt><dt><a href="#id2788958">References</a></dt></dl></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="intro"></a>Chapter 1. Introduction</h2></div></div><p>
+   ROX-Filer is a simple and easy to use graphical
+   file manager for X11 &#8212; the windowing system used on Unix and Unix-like
+   operating systems.  It is also the core component of the ROX Desktop
+   [<a href="#id2788964">ROX</a>]. Many of the filer's features were inspired by RISC
+   OS [<a href="#id2788980">RISC OS</a>]. `ROX' stands for `RISC OS&#8211;On&#8211;X'.
+  </p><div class="sect1"><a name="id2721890"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2721890"></a>Features</h2></div></div><p>
+
+    <div class="variablelist"><dl><dt><a name="id2721904"></a><span class="term">XDND</span></dt><dd><p><a name="id2721910"></a>
+        A common drag-and-drop protocol used, for example, by the GNOME
+        desktop[<a href="#id2789011">GNOME</a>]. This allows data to be loaded into an
+        application by dragging it from a filer window to a program. The full
+        specification is given in [<a href="#id2789027">DND</a>].
+     </p></dd><dt><a name="id2721928"></a><span class="term">XDS</span></dt><dd><p><a name="id2721934"></a>
+        An extension to XDND that allows applications to save data by
+        dragging an icon back to a filer window. The full specification is given in
+        [<a href="#id2789043">XDS</a>].
+     </p></dd><dt><a name="id2721946"></a><span class="term">Choices</span></dt><dd><p><a name="id2721952"></a>
+        A simple, but flexible, system for managing user choices.  See
+        [<a href="#id2789059">Choices</a>] for details.
+     </p></dd><dt><a name="id2721964"></a><span class="term">Application directories</span></dt><dd><p><a name="id2721969"></a>
+        Self contained relocatable applications, where installation is as simple as
+        copying it to where you want it and uninstalling it is just a matter of
+        deleting a directory. Described later in this documentation.
+     </p></dd><dt><a name="id2721979"></a><span class="term">Thumbnails</span></dt><dd><p><a name="id2721984"></a>
+        The filer can be made to display image files by using the image itself for the
+        icon, instead of a generic `this-is-an-image' icon. Very useful for organising
+        a directory full of photos! See [<a href="#id2789108">Thumbs</a>] for details
+        (spec is still in developement).
+     </p></dd></dl></div>
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="compiling"></a>Chapter 2. Compiling</h2></div></div><p>
+
+   If you've just got hold of the filer by downloading the source archive
+   then you'll need to compile it before you can use it. If you downloaded
+   and installed a binary package, or if ROX-Filer
+   was included with your system, then you can skip this section. If you got
+   here by clicking on the `i' symbol in a filer window, or if typing
+   <b>rox</b> at a shell prompt works, then you don't need to
+   compile.
+
+   <div class="itemizedlist"><p><b>To compile, you will need the following:</b></p><ul><li><p><a name="id2722044"></a>
+      Unix or Linux (root access is not required),
+    </p></li><li><p><a name="id2722051"></a>
+      The X Window system (supplied as standard on all modern systems),
+    </p></li><li><p><a name="id2722058"></a>
+      GTK+ 1.2.0 or later (libraries and headers) &#8212; get the latest version
+      from [<a href="#id2788996">GTK+</a>],
+    </p></li><li><p><a name="id2767988"></a>
+      A C compiler, such as `gcc' (standard on most systems).
+    </p></li></ul></div>
+
+   All of the above are standard on most modern Linux distributions.
+   To check which version of GTK+ you have installed, run the
+   <b>gtk-config</b> command, like this
+   (<tt>$</tt> is the shell prompt):
+
+   <pre class="screen">$ gtk-config --version
+    1.2.8</pre>
+   Due to bugs in earlier versions, GTK+ 1.2.8 is strongly
+   recommended.
+  </p><div class="procedure"><a name="id2768022"></a><p><b>To compile:</b></p><ol><li><a name="id2768027"></a><p>
+     The filer needs some shared files to work &#8212; icons for the various
+     file types, rules for determining file types and default run actions.
+     These are installed by the `rox-base' package. Install rox-base (from
+     <a href="http://rox.sourceforge.net" target="_top">http://rox.sourceforge.net</a> now if you haven't done so already.
+   </p></li><li><a name="id2721386"></a><p>
+     Change to the directory containing the ROX-Filer subdirectory.
+   </p></li><li><a name="id2721395"></a><p>
+     Run the <b>install.sh</b> script, like this:
+
+     <pre class="screen">$ ./install.sh</pre>
+
+   </p></li><li><a name="id2721418"></a><p>
+     ROX-Filer will perform various checks to find
+     out what kind of system it is being run on and will then compile. If it
+     doesn't work then please e-mail me and complain! Tell me what kind of
+     system you have and what errors were reported. If you manage to fix the
+     problem yourself then please e-mail me the fix.
+
+     The executable file is stored inside the ROX-Filer directory in a
+     different subdirectory for each platform. Therefore, you can compile
+     the same application on several different types of machine and then
+     run it from any of them using the AppRun script. This is particularly
+     useful in a network environment.
+   </p></li><li><a name="id2721445"></a><p>
+     Once the filer has compiled you will be asked where you want to install
+     it. If you want to do a system-wide installation as root, you may
+     want to stop here, <b>su</b> to root and rerun the install script.
+
+     If you don't have the root password then don't worry &#8212; just follow
+     the instructions for installing into your home directory.
+   </p></li></ol></div><p>
+
+   You can now run the filer by running the <b>rox</b> script without
+   any options, like this:
+
+   <pre class="screen">$ rox</pre>
+
+   A window should appear and display the contents of the current directory.
+
+   If you installed the script into your home directory then you may
+   need to set your <tt>PATH</tt> environment variable so that the shell can
+   find it. For example, if you installed it into a directory called
+   
+    `<tt class="filename">bin</tt>'
+   in your home directory, use this:
+
+   <pre class="screen">$ PATH=$HOME/bin:$PATH; export PATH</pre>
+
+   or (if you are using the csh(1) shell):
+
+   <pre class="screen">$ setenv PATH $HOME/bin:$PATH
+    $ rehash</pre>
+
+  </p></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="invoking"></a>Chapter 3. Invoking</h2></div></div><p>
+
+   By default, ROX-Filer will start by displaying
+   the current directory.  You can get it to display other directories instead
+   by listing them after the command:
+
+   <pre class="screen">$ rox /home /usr /usr/local</pre>
+
+   You can also use it to open files, like this:
+
+   <pre class="screen">$ rox README</pre>
+
+   The filer supports various options; use <tt>-h</tt> for a list.
+   All options have long and short forms (eg <tt>-h</tt> and
+   <tt>--help</tt>) &#8212; although on some systems you can only use the
+   short versions.
+   </p><p>
+   Note that if the same version of the filer is already running on this
+   machine then, by default, it will be used to open the directories.
+   You can override this (perhaps because the old copy has stopped responding for
+   some reason) using the <tt>--new</tt> option.
+   </p><p>
+   For a complete list of command-line options, see <a href="#manpage" title="Appendix A. Manual page">Appendix A. Manual page</a>
+  </p><div class="sect1"><a name="id2721762"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2721762"></a><a name="run_pin"></a>Pinboard support</h2></div></div><p>
+
+    If you want the filer to manage your desktop background then you use
+    the <tt>--pinboard</tt> option and supply a name for the pinboard,
+    eg:
+
+    <pre class="screen">$ rox --pinboard=MyPinboard</pre>
+
+    The pinboard configuration is saved in
+    
+    `<tt class="filename">&lt;Choices&gt;/ROX-Filer/pb_MyPinboard</tt>'
+  
+    as soon as you change it in some way (for example, by dropping a file
+    onto the background). You can have as many pinboards as you like and
+    switch between them by running rox again, eg:
+
+    <pre class="screen">$ rox --pinboard=MyOtherPinboard</pre>
+
+    To turn off the pinboard again, set the name to an empty string:
+
+    <pre class="screen">$ rox --pinboard=</pre>
+
+    See the <a href="#winman">window manager notes</a> if you have trouble getting the icons to
+    display correctly. The pinboard may also be turned on and off by locating
+    
+    `<tt class="filename">ROX-Filer</tt>'
+   in a filer window and choosing `Enable
+    pinboard' or `Disable pinboard' from the menu.  </p></div><div class="sect1"><a name="id2722343"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2722343"></a><a name="run_pan"></a>Panels</h2></div></div><p>
+
+    Panels work just like the pinboard. You can create a panel on any
+    side of the screen by using the options <tt>--left</tt>, <tt>--right,</tt>
+    <tt>--top</tt> and <tt>--bottom</tt>, depending on which side
+    of the screen the panel should appear on. On some systems, the short
+    (one letter) form of the options must be used. For example, to create
+    a panel along the bottom edge of the screen:
+
+    <pre class="screen">$ rox -b=MyPanel</pre>
+
+    The panel should be displayed in a window without a title bar. If
+    this does not work then see the <a href="#winman">window manager notes</a> for some ideas.
+    You can drag files onto either side of the panel to add them. Panel icons
+    can be repositioned by dragging them with the middle mouse button.
+    Changes to the panel are automatically saved to
+    
+    `<tt class="filename">&lt;Choices&gt;/ROX-Filer/pan_MyPanel</tt>'
+  .
+    As with the pinboard, you can switch between panel configurations
+    simply by running rox again with a different panel name. Specify a
+    blank name to remove the panel.
+
+    <pre class="screen">$ rox --bottom=MyOtherPanel
+     $ rox --bottom=</pre>
+
+   </p></div><div class="sect1"><a name="id2721613"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2721613"></a>Window manager notes</h2></div></div><p>
+
+    You may have to play around with your window manager a bit to get
+    the pinboard icons and panels to display correctly (eg, without borders
+    and underneath all other windows). In particular, try setting the
+    stacking level / depth to low (or a negative value). Make sure any
+    'Keep transients above other windows' type options are turned off!
+
+    In order for the filer to receive mouse clicks on the background (used
+    for the pinboard support) you need a GNOME-compliant window manager.
+    To see if your window manager supports this, try clicking the right
+    mouse button on an unused area of the background. If you get the pinboard
+    menu, all is well.
+   </p><div class="sect2"><a name="id2721830"></a><div class="titlepage"><div><h3 class="title"><a name="id2721830"></a>Sawfish / sawmill</h3></div></div><p>
+     Sawfish tries to guess whether you are using GNOME at start-up and only
+     provides support if so. You may need to add the line
+     <pre class="programlisting">(require 'gnome)</pre>
+     to your 
+    `<tt class="filename">.sawfishrc</tt>'
+   file (see the sawfish manual
+     for more details).
+    </p></div><div class="sect2"><a name="id2721859"></a><div class="titlepage"><div><h3 class="title"><a name="id2721859"></a>IceWM</h3></div></div><p>
+
+     Paste these configuration settings into
+     
+    `<tt class="filename">~/.icewm/preferences</tt>'
+  :
+
+     <pre class="programlisting">
+      # Manage root window (EXPERIMENTAL - normally enabled!)
+      GrabRootWindow=1 # 0/1
+      # Bitmask of root window button click to use in window manager
+      UseRootButtons=3 # [0-255]
+      # Desktop mouse-button click to show the menu
+      DesktopWinMenuButton=1 # [0-20]
+      # Desktop mouse-button click to show the window list
+      DesktopWinListButton=2 # [0-5]
+      # Desktop mouse-button click to show the window list menu
+      DesktopMenuButton=0 # [0-20]</pre>
+     Paste these into 
+    `<tt class="filename">~/.icewm/winoptions</tt>'
+  :
+
+     <pre class="programlisting">
+      # ROX-Filer pinboard and panel
+      ROX-Filer.icon: folder
+      ROX-Panel.layer: Dock
+      ROX-Panel.doNotCover: 1
+      ROX-Panel.ignoreWinList: 1
+      ROX-Panel.ignoreTaskBar: 1
+      ROX-Panel.ignoreQuickSwitch: 1
+      ROX-Pinboard.layer: Below
+      ROX-Pinboard.ignoreWinList: 1
+      ROX-Pinboard.ignoreTaskBar: 1
+      ROX-Pinboard.ignoreQuickSwitch: 1
+      ROX-Filer.layer: Normal</pre>
+     Restart IceWM and the filer for the new settings to take effect.
+
+    </p></div><div class="sect2"><a name="id2722102"></a><div class="titlepage"><div><h3 class="title"><a name="id2722102"></a>Window Maker</h3></div></div><div class="procedure"><a name="id2722108"></a><ol><li><a name="id2722111"></a><p>Run the filer using <b><tt>rox -p=Default</tt></b>.</p></li><li><a name="id2722127"></a><p>
+       Press <span class="keycap">Control</span>+<span class="keycap">Escape</span>, or
+       [RightButtonDown] on any window's titlebar.
+       Choose <span class="guimenuitem">Attributes...</span> from the menu.
+      </p></li><li><a name="id2722157"></a><p>
+       The Attributes Inspector window appears. From the pulldown menu
+       at the top, choose <span class="guimenuitem">Window Specification</span>
+       (the top item).
+      </p></li><li><a name="id2722175"></a><p>
+       Press the <span class="guibutton">Select window</span> button.
+       The cursor changes to a double crosshair. Select one of the
+       ROX-Filer pinboard icons. The radio buttons
+       in the 
+    `<span class="guilabel">Window Specification</span>'
+   frame should change
+       their labels to include <b><tt>ROX-Pinboard.ROX-Filer</tt></b>
+       as the first item. Select that radio button.
+      </p></li><li><a name="id2722215"></a><p>
+       Choose <span class="guimenuitem">Window Attributes</span> from the pulldown
+       menu. In the 
+    `<span class="guilabel">Attributes</span>'
+   frame, choose the
+       features you want the pinboard icons to have; I recommend the
+       following:
+	<div class="itemizedlist"><ul><li><p><a name="id2722241"></a>Disable titlebar</p></li><li><p><a name="id2722249"></a>Disable resizebar</p></li><li><p><a name="id2722254"></a>Disable close button</p></li><li><p><a name="id2722260"></a>Disable miniaturize button</p></li><li><p><a name="id2722266"></a>Keep at bottom (sunken)</p></li><li><p><a name="id2722272"></a>Omnipresent</p></li></ul></div>
+       </p></li><li><a name="id2722281"></a><p>
+       Choose <span class="guimenuitem">Advanced Options</span> from the pulldown
+       menu. In the 
+    `<span class="guilabel">Advanced</span>'
+   frame, choose the advanced
+       features you wish; I recommend the following:
+
+       <div class="itemizedlist"><ul><li><p><a name="id2718131"></a>Do not show in the window list</p></li><li><p><a name="id2718137"></a>Ignore 'Hide Others'</p></li><li><p><a name="id2718143"></a>Ignore 'Save Session' (possibly)</p></li></ul></div>
+      </p></li><li><a name="id2718150"></a><p>
+       When you're finished selecting window attributes, press the
+       <span class="guibutton">Save</span> button, and then close the Attributes
+       Inspector window using the <span class="guibutton">X</span> button in the titlebar.
+      </p></li></ol></div></div><div class="sect2"><a name="id2718178"></a><div class="titlepage"><div><h3 class="title"><a name="id2718178"></a>Others</h3></div></div><p>
+
+     If all else fails, try running rox with the <tt>-n</tt> and
+     <tt>-o</tt> options; this overrides window manager control of the
+     icons altogether (<tt>-n</tt> forces the filer to start a new
+     copy).
+
+    </p></div></div><div class="sect1"><a name="id2718205"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2718205"></a>Running as root</h2></div></div><p>
+
+    If you run the filer as the `root' user then the filer will display
+    a message at the top of each window to remind you. The root user has
+    permission to access or change any file in the system, so be very
+    careful when using the filer like this.
+
+    Normally, you should log in as an ordinary user and only change to
+    root when you need to. You can create a simple script which runs the
+    filer as root &#8212; something like this:
+
+    <pre class="programlisting">
+     #!/bin/sh
+
+     su -m -c &quot;rox $*&quot;</pre>
+
+    Then, you can get a root filer window by simply running the script
+    and entering the root password. Remember, any file operations you
+    perform and any programs you run from these windows will run as root
+    too! Be careful!
+
+    You may find that the X server won't allow root (or other users) to
+    connect. Reading the manual pages for <b>xauth</b> and
+    <b>xhost</b> may give you some hints, but it varies
+    between systems (which is why this isn't built in to the filer!).
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="keys"></a>Chapter 4. Mouse button and key bindings</h2></div></div><div class="itemizedlist"><p><b>Quick start:</b></p><ul><li><p><a name="id2718280"></a>Click the left
+     <sup>[<a name="id2718285" href="#ftn.id2718285">1</a>]</sup> mouse button to open files and
+     directories.</p></li><li><p><a name="id2718294"></a>
+     Click the right button to get a menu. Click over a file to perform an action on that file.
+   </p></li><li><p><a name="id2718301"></a>
+     Drag files between windows with the left button to copy them, or with
+     the middle button to get a menu of possible actions (copy, move, link,
+     etc).
+   </p></li></ul></div><p>
+   By default, the mouse button bindings are designed to fit in with X
+   conventions. However, the behaviour is highly configurable &#8212; have a play in
+   the Options window if you don't like the normal settings. The normal settings
+   behave as follows:
+  </p><div class="informaltable" id="id2718320"><a name="id2718320"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Key or mouse button</th><th>Action</th></tr></thead><tbody><tr><td>Left button click</td><td>
+       Open the file or directory clicked on. Hold down <span class="keycap">Control</span>
+       to select things instead of opening them. Hold down <span class="keycap">Shift</span>
+       to look inside applications, treat files as text, follow symlinks or
+       mount devices.
+     </td></tr><tr><td>Middle button click</td><td>
+       Same as left click, but open a directory in a new window or close the viewer
+       when opening a file.
+     </td></tr><tr><td>Right button click</td><td>
+       Open the main menu. Hold down <span class="keycap">Control</span> while clicking to go
+       directly to the Selection submenu. Hold down <span class="keycap">Shift</span> to get the
+       Send To menu (see the <a href="#SendTo">Send To menu</a> section).
+     </td></tr><tr><td>Drag an item  (left mouse button)</td><td>
+       Copy the file(s) to the destination (an application or another filer
+       window). Hold down <span class="keycap">Shift</span> to move the file,
+       <span class="keycap">Control</span>+<span class="keycap">Shift</span> to create
+       a symbolic link, or <span class="keycap">Alt</span> to get a menu of possible actions.
+     </td></tr><tr><td>Drag an item (middle mouse button)</td><td>
+       When you let go, display a menu of possible actions.
+       There is an option to make this move the files rather than open the menu.
+     </td></tr><tr><td>Drag (not over an item)</td><td>
+       Select a group of items by dragging a box around them. With the left
+       mouse button, only the files in the box will be selected. If you hold
+       down <span class="keycap">Control</span> then the boxed items are added to the selection.
+       If you use the middle button then the boxed items switch between being selected
+       and unselected.
+     </td></tr><tr><td>Double-click background</td><td>
+       Resize the window to a sensible size.
+     </td></tr><tr><td><span class="keycap">Backspace</span></td><td>
+       Change to viewing the parent directory.
+     </td></tr><tr><td>Cursor keys</td><td>
+       Move the cursor around.
+     </td></tr><tr><td><span class="keycap">Page Up</span>, <span class="keycap">Page Down</span></td><td>
+       Move the cursor up and down a page at a time.
+     </td></tr><tr><td><span class="keycap">Home</span>, <span class="keycap">End</span></td><td>
+       Move to the first/last entry in the directory.
+     </td></tr><tr><td><span class="keycap">Return</span></td><td>
+       Acts like clicking on the file. You may hold down Shift for other
+       effects, as with clicking.
+     </td></tr><tr><td><span class="keycap">Spacebar</span></td><td>
+       Toggles the item under the cursor between being selected and unselected,
+       and moves to the next item.
+     </td></tr><tr><td><span class="keycap">Tab</span>, <span class="keycap">Shift</span>+<span class="keycap">Tab</span></td><td>
+       Moves the cursor to the next/previous selected item.
+     </td></tr><tr><td>Hold mouse over an item</td><td>
+       Shows a tooltip containing a brief description of an application (if
+       available), the target of a symbolic link, and the full name of a file,
+       if it's too long to show in the main window.
+     </td></tr></tbody></table></div><p>
+   Other keys can easily be defined by opening the
+   menu, moving the pointer over the item you want to use and pressing
+   a key. The key will appear in the menu and can be used from then on.
+   Key bindings are automatically saved when the filer quits.
+
+  </p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a name="ftn.id2718285" href="#id2718285">1</a>] </sup>This documentation assumes that button&#8211;1 is the left
+       button, button&#8211;2 is the middle button and button&#8211;3 is the
+       right button. This is not always the case &#8212; for example, in a
+       left-handed setup.</p></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="selection"></a>Chapter 5. The selection and file groups</h2></div></div><p>
+   When you select items in a ROX-Filer window,
+   the filer takes the <i>primary selection</i>. You can then paste
+   into another window to get the pathnames of the selected files.
+  </p><div class="procedure"><a name="id2718672"></a><p><b>Example: loading a file into an application that doesn't support
+    drag-and-drop:</b></p><ol><li><a name="id2718680"></a><p>Open the application's Open dialog box.</p></li><li><a name="id2718689"></a><p>
+     <span class="keycap">Control</span>-click on the file in
+     ROX-Filer to select it.</p></li><li><a name="id2718712"></a><p>
+     Click the middle button in the filename box in the application to paste the
+     name in.
+   </p></li></ol></div><p>
+   Note that clicking the middle mouse button in the main area of most web-browsers
+   will open the selected file.
+   </p><p>
+   If you select something else (eg, some text in another program), the selected
+   items in the filer window will be shown shaded (the filer no longer has the
+   primary selection).  Clicking on one of the shaded items will cause the
+   filer to regain the primary selection.
+  </p><div class="sect1"><a name="id2718736"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2718736"></a>Saving and restoring the selection</h2></div></div><p>
+    It is sometimes useful to save the current selection for later. You can
+    save the current selection to one of ten numbered groups by pressing
+    <span class="keycap">Control</span>+<span class="keycap">&lt;number&gt;</span>.
+    You can restore a saved group by pressing the group number on its own. You
+    can do this from a different directory, or even a different filer window.
+    </p><p>
+    Saving is also useful even if there is no selection, since it still saves
+    the current directory.
+   </p><div class="procedure"><a name="id2718771"></a><p><b>Example: saving a directory and returning to it later:</b></p><ol><li><a name="id2718778"></a><p>You are looking at a directory, and wish to remember it.
+      Press <span class="keycap">Control</span>+<span class="keycap">1</span>.</p></li><li><a name="id2718799"></a><p>Move to another directory, or close the window, etc.</p></li><li><a name="id2718808"></a><p>Press <span class="keycap">1</span> in any filer window to return
+      to the first directory.</p></li></ol></div><p>The groups are saved automatically for next time the filer is loaded.
+  </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="toolbar"></a>Chapter 6. <a name="Toolbar"></a>The toolbar</h2></div></div><p>
+
+   By default, each window has a toolbar along the top. You can disable
+   this (or make it larger) from the Options window, as well as set which
+   tools appear on the toolbar. Normally, you should click with the left
+   mouse button (1). However, many tools can perform a related function
+   if clicked on with buttons 2 or 3 (middle or right).
+  </p><div class="informaltable" id="id2718864"><a name="id2718864"></a><table border="1"><colgroup><col><col><col></colgroup><thead><tr><th>
+       Icon</th><th>
+       Mouse button 1</th><th>
+       Other button
+     </th></tr></thead><tbody><tr><td>
+       Cross</td><td>
+       Close the window</td><td>
+       Open a new window
+       </td></tr><tr><td>
+       Up arrow</td><td>
+       Change to parent directory</td><td>
+       Show parent in a new window <a href="#newwin_fn">[1]</a></td></tr><tr><td>
+       House</td><td>
+       Change to home directory</td><td>
+       Show home in a new window <a href="#newwin_fn">[1]</a></td></tr><tr><td>
+       Looping arrows</td><td>
+       Reread the directory contents</td><td>
+       Open a new window
+       </td></tr><tr><td>
+       Magnifying glass</td><td>
+       Make icons bigger</td><td>
+       Make icons smaller
+       </td></tr><tr><td>
+       List</td><td>
+       Hide or show extra details</td><td>
+       Same
+       </td></tr><tr><td>
+       Dot files</td><td>
+       Toggle the display of hidden file (those with names starting with a dot)</td><td>
+       Same
+       </td></tr><tr><td>
+       Information</td><td>
+       Show ROX-Filer's help files</td><td>
+       Show help files and close window
+     </td></tr></tbody></table></div><p>
+   <a name="newwin_fn"></a>[1]
+   If the 'New window on button 1' option is turned on
+   then the default is to open a new window &#8212; clicking with the other
+   button reuses the same window instead.
+  </p><p>
+   Dragging files to the Up or Home icons acts just like dragging them
+   into the directory which the button leads to.
+
+   The toolbar can also show the number of files in the directory, and
+   information about the selection. This can be turned on or off in the
+   Options box.
+
+
+  </p></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="menus"></a>Chapter 7. The menus</h2></div></div><p>
+   By default, you can open a menu by right clicking over a pinboard, panel or
+   filer window.
+
+   In filer windows, you may also press <span class="keycap">\</span> to open the menu. As
+   a shortcut, you can open the File submenu directly by holding down the
+   <span class="keycap">Control</span> key when opening the menu. Here is a full
+   description of each menu item:
+
+   <div class="informaltable" id="id2719065"><a name="id2719065"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">Display</span></td><td>
+        Change the display settings.
+      </td></tr><tr><td><span class="guimenuitem">File</span></td><td>
+        Operations on the selected items.
+      </td></tr><tr><td><span class="guimenuitem">Select</span></td><td>
+        Control which items are selected.
+      </td></tr><tr><td><span class="guimenuitem">Options...</span></td><td>
+        Configure ROX-Filer.
+      </td></tr><tr><td><span class="guimenuitem">New</span></td><td>
+        Create a new file or subdirectory inside this directory.
+      </td></tr><tr><td><span class="guimenuitem">Xterm Here</span></td><td>
+        Open an xterm with its current directory set to this directory.
+      </td></tr><tr><td><span class="guimenuitem">Window</span></td><td>
+        Operations on the window as a whole.
+      </td></tr></tbody></table></div>
+
+  </p><div class="sect1"><a name="id2719183"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2719183"></a>The display menu</h2></div></div><p>
+
+    <div class="informaltable" id="id2719193"><a name="id2719193"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">Huge Icons</span></td><td>
+         Extra large icons (mainly useful with thumbnails, see below).
+         </td></tr><tr><td><span class="guimenuitem">Large Icons</span></td><td>
+         Each object in the directory is shown as a large icon with its name
+         below.
+         </td></tr><tr><td><span class="guimenuitem">Small Icons</span></td><td>
+         Items are drawn smaller than usual, allowing you to see more files
+         at once.
+         </td></tr><tr><td><span class="guimenuitem">Huge, With...</span></td><td>
+         As for <span class="guimenuitem">Large, With...</span>, but with extra large icons.
+         </td></tr><tr><td><span class="guimenuitem">Large, With...</span></td><td><p>Entries are displayed along with some extra details:</p><div class="itemizedlist"><ul><li><p><a name="id2719297"></a><span class="guimenuitem">Summary</span>
+            shows the file permissions, owner, group, size and modification time.
+          </p></li><li><p><a name="id2719312"></a><span class="guimenuitem">Sizes</span>
+            shows just the size of each file (not directories).
+          </p></li><li><p><a name="id2719323"></a><span class="guimenuitem">Permissions</span>
+            shows just the permissions and owner.
+          </p></li><li><p><a name="id2719335"></a><span class="guimenuitem">Type</span>
+            shows the MIME type of each file.
+          </p></li><li><p><a name="id2719347"></a><span class="guimenuitem">Times</span>
+            shows the times the file was last accessed, modifed and changed.
+            Reading a file's contents or listing a directory updates the
+            <i>access time</i>; modifying the contents of a file or
+            the list of files in a directory updates the <i>modification
+             time</i>; changing a file's owner or permissions updates the
+            <i>change time</i>.
+          </p></li></ul></div></td></tr><tr><td><span class="guimenuitem">Small, With...</span></td><td>
+         As above, but with a smaller icon and all on one line.
+         </td></tr><tr><td><span class="guimenuitem">Sort by Name</span></td><td>
+         Items are arranged by name. There is an option to make this case-sensitive.
+         </td></tr><tr><td><span class="guimenuitem">Sort by Type</span></td><td>
+         Items are grouped by their types and then sorted by name within the
+         groups.
+         </td></tr><tr><td><span class="guimenuitem">Sort by Date</span></td><td>
+         Most recently modified first.
+         </td></tr><tr><td><span class="guimenuitem">Sort by Size</span></td><td>
+         Largest first.
+         </td></tr><tr><td><span class="guimenuitem">Show Hidden</span></td><td>
+         If on, files beginning with a dot are shown, otherwise they are hidden.
+	 The titlebar shows 
+    `<span class="guilabel">(All)</span>'
+   when this is on.
+         </td></tr><tr><td><span class="guimenuitem">Show Thumbnails</span></td><td>
+	 When on, the filer tries to load every image file and use that
+	 image as the file's icon. Useful if you have a directory full of
+	 photos and can't remember which is which!
+         When using Gtk+-2.0 or libpng, the thumbnails are saved in
+         
+    `<tt class="filename">~/.thumbnails</tt>'
+   for quick loading next time.
+         Otherwise, they are lost when the filer quits.
+	 While loading thumbnails, a progress bar appears at the bottom of
+	 the window. Clicking on the <span class="guibutton">Cancel</span> button
+	 beside the bar stops the scan.
+	 The titlebar shows 
+    `<span class="guilabel">(Thumbs)</span>'
+   when this is on.
+         </td></tr><tr><td><span class="guimenuitem">Refresh</span></td><td>
+         Rereads the contents of the directory and details of all the files
+         in it. Use this if the display becomes out-of-date.
+
+       </td></tr></tbody></table></div>
+
+   </p><div class="sect2"><a name="id2781348"></a><div class="titlepage"><div><h3 class="title"><a name="id2781348"></a><a name="Permissions"></a>
+     Permissions
+    </h3></div></div><p>
+
+     The permissions field, when shown, is made up of four groups of three
+     flags. Each flag is displayed as a letter if it is on and a dash (&#8211;)
+     if not. The first three characters show the permissions for the owner
+     of the file, the second for other members of the file's group and
+     the third for everyone else. Whichever group applies to the
+     ROX-Filer process itself is shown underlined.
+     The fourth group shows any special flags.
+     </p><p>
+     The meanings of the characters are:
+
+     <div class="itemizedlist"><ul><li><p><a name="id2781386"></a><tt>r</tt> &#8212;
+        Permission to read the contents of a file, or the names of files
+        in a directory.</p></li><li><p><a name="id2781399"></a><tt>w</tt> &#8212;
+        Permission to alter the contents of a file, or change which names
+        appear in a directory.</p></li><li><p><a name="id2781413"></a><tt>x</tt> &#8212;
+        Permission to run the file as a program, or refer to the files
+        listed within the directory.</p></li><li><p><a name="id2781426"></a><tt>U</tt> &#8212;
+        This program executes with the <i>effective user ID</i> of its
+        owner rather than the person who ran it.</p></li><li><p><a name="id2781443"></a><tt>G</tt> &#8212;
+        This program executes with the <i>effective group ID</i> of its
+        group, regardless of who ran it.</p></li><li><p><a name="id2781460"></a><tt>T</tt> &#8212;
+        Entries in this directory can only be altered or removed by the
+        people who own the files even if they have write permission on the
+        directory itself.</p></li></ul></div>
+     For example,
+     <pre class="programlisting">
+      <u>rwx</u>,rwx,r-x/---</pre>
+     means that the owner of the file is the same as the effective user of
+     ROX-Filer (basically, you own the file), you and
+     members of the file's group have read, write and execute permission and other
+     people have only read and execute permission. There are no special flags set.
+
+     The rules which determine which permissions apply may vary slightly between
+     operating systems, but a rough guide is:
+
+     <div class="itemizedlist"><ul><li><p><a name="id2781508"></a>If the <i>effective user ID</i> of the
+        process is equal to the file's owner, then the owner permissions apply.
+      </p></li><li><p><a name="id2781519"></a>Otherwise, if the <i>effective group ID</i>
+        of the process is equal to the file's group OR the file's group is one
+        of the process's <i>supplemental groups</i> then the
+        group permissions apply.
+      </p></li><li><p><a name="id2781536"></a>Otherwise, the `other' permissions apply. The
+        <i>real user ID</i> and <i>real group
+         ID</i> have no effect (except that a process may set its real
+        IDs to its effective IDs).
+      </p></li></ul></div>
+
+    </p></div></div><div class="sect1"><a name="id2781557"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2781557"></a>The file menu</h2></div></div><p>
+    All of these work in the same way &#8212; if you open the menu with some
+    items selected then the operation applies to those items. If you open
+    then menu over an item while there is no selection then that item
+    is temporarily selected.
+    </p><p>
+    If you choose one of these while there is no selection at all then the
+    window goes into `target mode'; the operation happens to the next item you
+    click on. Click on the window background, press <span class="keycap">Escape</span>, or
+    click with the right mouse button to cancel target mode. Target mode is
+    mainly useful with the 
+    `<span class="guilabel">Single-click navigation in filer
+    windows</span>'
+   option and keys bound to the various menu entries.
+    </p><p>
+    Note that individual applications may add extra menu items to the
+    top of this submenu when you click over them &#8212; see
+    <a href="#AppDir">Application directories</a> for details.
+
+    <div class="informaltable" id="id2781610"><a name="id2781610"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">Copy...</span></td><td>
+         Make a copy of this object.
+       </td></tr><tr><td><span class="guimenuitem">Rename...</span></td><td>
+         Change the name used for this object, or move it between directories.
+       </td></tr><tr><td><span class="guimenuitem">Link...</span></td><td>
+         Create a symbolic link to this name.
+       </td></tr><tr><td><span class="guimenuitem">Shift Open</span></td><td>
+         Opens applications as directories, files as text/plain, mount points by
+         mounting or unmounting them and symlinks by opening the directory containing
+         the thing they point to. This is the same effect as clicking with
+	 <span class="keycap">Shift</span> held down. The text of the menu entry changes
+	 to show which action will be performed.
+       </td></tr><tr><td><span class="guimenuitem">Help</span></td><td>
+         Explain what kind of thing is selected. For applications, display
+         the help files.
+       </td></tr><tr><td><span class="guimenuitem">Info</span></td><td>
+         Display extra information about this object.
+       </td></tr><tr><td><span class="guimenuitem">Set Run Action...</span></td><td>
+         Allows you to set the default program to use when opening files of
+         this type. See <a href="#RunAction">the Set Run Action box</a> section for details.
+       </td></tr><tr><td><span class="guimenuitem">Set Icon...</span></td><td>
+         You can give each file or directory its own special icon using this
+         feature &#8212; simply drag a suitable image onto <a href="#SetIcon">the Set Icon box</a>.
+       </td></tr><tr><td><span class="guimenuitem">Open (A)VFS</span></td><td>
+         Open the file as if it was a directory &#8212; see the
+         <a href="#vfs">Virtual file systems</a> section.
+       </td></tr><tr><td><span class="guimenuitem">Send To...</span></td><td>
+         Opens the `Send To' menu, allowing you to send the selected files
+         to one of a list of applications. See the
+         <a href="#SendTo">Send To menu</a> section.
+       </td></tr><tr><td><span class="guimenuitem">Delete</span></td><td>
+         Remove all the selected entries from the directory. Subdirectories
+         will have their contents deleted first. Deleting symlinks only removes
+         the link, not the thing it points to.
+       </td></tr><tr><td><span class="guimenuitem">Disk Usage</span></td><td>
+         Count the sizes of all the selected items. Directories also have their
+         contents counted. Symlinks count themselves, not the things they point
+         to.
+       </td></tr><tr><td><span class="guimenuitem">Permissions</span></td><td>
+         Allows you to change the permissions for the selected files.
+       </td></tr><tr><td><span class="guimenuitem">Find</span></td><td>
+         Search for files by specifying various conditions &#8212; see the
+         <a href="#Searching">Searching</a> section.
+       </td></tr></tbody></table></div>
+   </p><p><b>Note about symlinks:</b> 
+     A symbolic link stores the <i>location</i>
+     of another file. Deleting the symlink doesn't affect the other file.
+     Deleting the other file means that the symlink won't work. There are
+     two types of symbolic link &#8212; Relative and Absolute. An absolute
+     link stores the path from the root directory to the target file (eg
+     
+    `<tt class="filename">/home/fred/MyFile</tt>'
+  ).
+
+     A relative path stores the path from the symlink
+     to the target (eg 
+    `<tt class="filename">../fred/MyFile</tt>'
+  ).
+     If the target file is never going to move then you want an absolute link,
+     but if the target may move (and the symlink will be moved with it) then
+     you want a relative link.
+    </p></div><div class="sect1"><a name="id2781938"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2781938"></a>The select menu</h2></div></div><p>
+    This menu allows you to select and unselect files in various ways. See the
+    <a href="#keys">mouse and key bindings</a> section for other ways to select files.
+
+    <div class="informaltable" id="id2781959"><a name="id2781959"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">Select All</span></td><td>
+         Select every item in this window.
+       </td></tr><tr><td><span class="guimenuitem">Clear Selection</span></td><td>
+         Unselect every item in this window.
+       </td></tr><tr><td><span class="guimenuitem">Invert Selection</span></td><td>
+	 Every selected file becomes unselected, and every unselected file
+	 becomes selected.
+       </td></tr><tr><td><span class="guimenuitem">Select If...</span></td><td>
+         Select just those files that match the given pattern &#8212;
+         see the <a href="#SelectIf">Select If</a> section.
+       </td></tr></tbody></table></div>
+
+   </p></div><div class="sect1"><a name="id2782047"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782047"></a>The new menu</h2></div></div><p>
+
+    Each entry in this submenu opens a savebox for creating a new file or
+    directory. There are two standard entries; the others are the contents of
+    your 
+    `<tt class="filename">&lt;Choices&gt;/Templates</tt>'
+   directory, if it
+    exists.
+
+
+    <div class="informaltable" id="id2782068"><a name="id2782068"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td>
+         Directory</td><td>
+         Create a new directory.
+         </td></tr><tr><td>
+         File</td><td>
+         Create a blank file.
+         </td></tr><tr><td>
+         &lt;user entries&gt;</td><td>
+         Copy a file from your Templates directory.
+       </td></tr></tbody></table></div>
+
+
+    To add your own entries, create a new directory called
+    
+    `<tt class="filename">~/Choices/Templates</tt>'
+  
+    (if you have the default CHOICESPATH) and put any files you want in
+    there. Each file in the directory will appear on the menu and the
+    box that appears will copy it. For example, you could create a blank
+    HTML file:
+
+    <pre class="programlisting">
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  The contents.
+ &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    Save this as 
+    `<tt class="filename">index.html</tt>'
+   inside the
+    
+    `<tt class="filename">Templates</tt>'
+   directory and you can easily create new
+    HTML files. You can also save blank documents from various applications
+    into here (eg, a blank spreadsheet, a blank letter, etc).
+    </p><p>
+    Note that you cannot set keyboard shortcuts for these user-defined
+    entries at present.
+
+   </p></div><div class="sect1"><a name="id2782158"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782158"></a>The window menu</h2></div></div><p>
+
+
+    <div class="informaltable" id="id2782169"><a name="id2782169"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">Parent, New Window</span></td><td>
+         Open a new window displaying this window's parent.
+       </td></tr><tr><td><span class="guimenuitem">Parent, Same Window</span></td><td>
+         As above, but reuse this window.
+       </td></tr><tr><td><span class="guimenuitem">New Window</span></td><td>
+         Open another window onto this directory.
+       </td></tr><tr><td><span class="guimenuitem">Home Directory</span></td><td>
+         Change to your home directory.
+       </td></tr><tr><td><span class="guimenuitem">Resize Window</span></td><td>
+         Set the window to a sensible size for its contents.
+       </td></tr><tr><td><span class="guimenuitem">Close Window</span></td><td>
+         Close this window.
+       </td></tr><tr><td><span class="guimenuitem">Enter Path...</span></td><td>
+         Open the path-entry box (see the the <a href="#mini">Minibuffer</a> section).
+       </td></tr><tr><td><span class="guimenuitem">Shell Command...</span></td><td>
+         Open the shell command box (see the <a href="#mini">Minibuffer</a> section).
+       </td></tr><tr><td><span class="guimenuitem">Show ROX-Filer Help</span></td><td>
+	 Same as selecting ROX-Filer and choosing
+	 <span class="guimenuitem">Help</span> from the menu.
+       </td></tr></tbody></table></div>
+
+
+   </p></div><div class="sect1"><a name="id2782346"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782346"></a><a name="SendTo"></a>The send to menu</h2></div></div><p>
+
+    The `Send To' menu provides a quick way to send some files to an application.
+    The filer scans all the 
+    `<tt class="filename">SendTo</tt>'
+   directories in your
+    <tt>CHOICESPATH</tt> and lists the contents on this menu.
+    </p><p>
+    To change which applications appear here you should choose the
+    <span class="guimenuitem">Customise</span> item from the bottom
+    of the menu to create and open your own SendTo directory. Applications can be
+    symlinked into this directory by dragging them in with <span class="keycap">Control</span>
+    and <span class="keycap">Shift</span> held down.
+    </p><p>
+    Opening the Send To menu via the main menu is rather slow, so it is
+    normally opened by clicking the Menu mouse button over a file while
+    holding the <span class="keycap">Shift</span> key down.
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="icons"></a>Chapter 8. The pinboard and panels</h2></div></div><p>
+
+   The <a href="#run_pin">Pinboard support</a> and <a href="#run_pan">Panel support</a> sections explain
+   how to turn the pinboard and panels on. Once on, you may drop items from filer
+   windows onto the them to pin them up. Clicking on a pinned item acts just like
+   clicking on it in a filer window. You can drag pinned icons just like normal
+   icons and you can right-click on one to see the popup menu.
+   </p><p>
+   Drag panel icons with the middle mouse button to move them around.
+   In previous versions of the filer, pinboard icons were also moved using the
+   middle mouse button. This may still work (depending on your window manager),
+   but using the left mouse button is now preferred.
+   </p><p>
+   Changes to the pinboard and panel are automatically saved. Clicking on pinned
+   icons with <span class="keycap">Control</span> held down selects and unselects them.
+   Click on the background to unselect them all.
+   </p><p>
+   If the panel has so many icons that they can't all be shown at once
+   then you can scroll it by dragging the blank area in the middle.
+  </p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a name="id2782483"></a>Important</h3><p>
+    Pinning a file does <i>not</i> copy it, it merely
+    creates a shortcut to the original file. If you delete the file, then
+    you've lost it! Removing a pinned file from its pinboard or panel
+    only removes the link. This is different to most other filers...
+  </p></div><div class="sect1"><a name="id2782497"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782497"></a>The pinboard and panel menus</h2></div></div><p>
+
+    These menus are both the same, and very simple:
+
+
+    <div class="informaltable" id="id2782510"><a name="id2782510"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Entry</th><th>Action</th></tr></thead><tbody><tr><td><span class="guimenuitem">ROX-Filer</span></td><td>
+         Show the filer's help, edit the options or open your home directory.
+       </td></tr><tr><td><span class="guimenuitem">File `file'</span></td><td>
+         Offers a smaller version of the filer's submenu of the same name.
+       </td></tr><tr><td><span class="guimenuitem">Edit Item</span></td><td>
+         Change the name displayed under the icon, or the pathname the item
+         points to.
+       </td></tr><tr><td><span class="guimenuitem">Show Location</span></td><td>
+         Open a directory viewer showing where the file is stored.
+       </td></tr><tr><td><span class="guimenuitem">Remove Item(s)</span></td><td>
+         Remove the selected items from the pinboard or panel.
+       </td></tr></tbody></table></div>
+
+    If you are setting up the defaults for multiple users and
+    you wish to create a `Home' icon that leads to each user's home directory
+    then you should first create a new icon and then use
+    <span class="guimenuitem">Edit Icon</span> to change the location to
+    
+    `<tt class="filename">~</tt>'
+   and the name to `Home'.
+    </p><p>
+    Note that individual applications may add extra menu items to the
+    top of this menu when you click over them &#8212; see <a href="#AppDir">Application directories</a>
+    for details.
+   </p></div><div class="sect1"><a name="id2782639"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782639"></a>Panel applets</h2></div></div><p>
+
+    ROX-Filer allows you to run small programs
+    inside the panel &#8212; such programs are called
+    <i>applets</i>. To run an applet, drag it onto the panel from
+    a filer window and instead of the applet's icon being shown, the applet
+    will run.
+   </p><div class="procedure"><a name="id2782665"></a><p><b>To create your own applets (programmers only!):</b></p><ol><li><a name="id2782672"></a><p>
+      Create a directory for the applet (eg 
+    `<tt class="filename">MyApplet</tt>'
+  ).
+    </p></li><li><a name="id2782687"></a><p>
+      Put an icon called 
+    `<tt class="filename">.DirIcon</tt>'
+   inside it (so the directory
+      appears with an icon).
+    </p></li><li><a name="id2782704"></a><p>
+      Make a 
+    `<tt class="filename">Help</tt>'
+   directory inside it for when the user chooses
+      <span class="guimenuitem">Help</span> from the menu.
+    </p></li><li><a name="id2782727"></a><p>
+      Create an executable file called 
+    `<tt class="filename">AppletRun</tt>'
+  . This will be
+      passed the XID of the panel socket window when the directory is dragged
+      onto the panel. You can use this to create a GtkPlug widget. An
+      example applet (written in python) is available at
+      <a href="http://rox.sourceforge.net/applets.php3" target="_top">http://rox.sourceforge.net/applets.php3</a>
+    </p></li></ol></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="virtual"></a>Chapter 9. 
+   <a name="vfs"></a>Virtual file systems
+  </h2></div></div><p>
+
+   Some types of file can be represented as a directory. A typical example
+   is a zip file, which contains an entire directory structure in compressed
+   form. It is often useful to be able to open up such a file as if it
+   was a real directory, and the VFS system allows you to do this.
+
+   <div class="itemizedlist"><p><b>To use this feature you must have one or both of the
+     following:</b></p><ul><li><p><a name="id2782793"></a>
+      A system such as AVFS[<a href="#id2789075">AVFS</a>] which causes the kernel to
+      support various Virtual File Systems directly. This is the best option
+      since all programs will be able to access the contents of the VFS. You
+      may require root access to install such a system, however, and it is not
+      available on all platforms.
+    </p></li><li><p><a name="id2782808"></a>
+      Support for the Midnight Commander VFS library compiled into
+      ROX-Filer. This happens automatically when you
+      compile ROX-Filer if it can find
+      the VFS library &#8212; this means having 
+    `<tt class="filename">libvfs.so</tt>'
+  
+      (or 
+    `<tt class="filename">libvfs.a</tt>'
+  ) in a system library directory or in the
+      directory in the environment variable <tt>LD_LIBRARY_PATH</tt>. In
+      this case, you will be able to view the directory structure and copy
+      files out of it, but not change it.
+     </p><p>
+      When using libvfs, the menu structure is slightly different &#8212;
+      <span class="guimenuitem">Open AVFS</span> is replaced by the Open
+       VFS submenu.  This is simply a short-cut for using the
+      path-entry box (explained below), so if you want to use a VFS not listed
+      on the menu you can type in the path directly, eg:
+      
+    `<tt class="filename">/home/fred/archive.zip#uzip/</tt>'
+  .
+
+      Don't forget the final slash!
+      </p><p>
+      Use of libvfs is strongly discouraged; use AVFS instead. Recent versions
+      of the library don't compile properly, and it can't be used on many
+      systems because it conflicts with large file support.
+     </p></li></ul></div>
+
+  </p></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="minibuffer"></a>Chapter 10. <a name="mini"></a>The mini-buffer</h2></div></div><p>
+
+   The mini-buffer is a white bar that appears along the bottom of the
+   window and allows you to enter some text. Press <span class="keycap">Escape</span> to
+   get rid of it again. It behaves in different ways depending on how you
+   invoked it:
+  </p><div class="sect1"><a name="id2782929"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2782929"></a>The path-entry box</h2></div></div><p>
+
+    This allows you to type in a path directly. As you type the display
+    is updated to show the item entered visually. The main use is to find
+    a file in a large directory quickly, but you can also use it for navigating
+    between directories, or for selecting a full pathname from somewhere
+    else and pasting it directly into the path-entry box.
+
+
+    <div class="informaltable" id="id2782946"><a name="id2782946"></a><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td><span class="keycap">Return</span></td><td>
+         Open the currently selected item.
+       </td></tr><tr><td><span class="keycap">Tab</span></td><td>
+         Shell-style tab completion.
+       </td></tr><tr><td><span class="keycap">Up</span>, <span class="keycap">Down</span></td><td>
+         Select the previous/next matching entry.
+       </td></tr></tbody></table></div>
+
+   </p><p>
+    If you start entering a name beginning with a `.' then the `Show Hidden'
+    feature is temporarily turned on so that the file can be shown.
+   </p><p>
+    Tab completion tries to fill in as many characters for you as it can.
+    For example, if there are two files in a directory called `save-mail-nov-1999'
+    and `save-mail-dec-1999' then typing 'save' and pressing
+    <span class="keycap">Tab</span> will expand `save' to `save-mail-' and beep to
+    indicate that the match is not complete. If you use tab completion on a
+    directory and it is unique then the filer will automatically change into
+    the directory. This behavior should be familiar to shell users.
+   </p><div class="informalexample" id="id2783046"><a name="id2783046"></a><p>
+     Let's say you want to locate the documentation for Wine in the directory
+     
+    `<tt class="filename">/usr/doc</tt>'
+   (which is usually very large).
+     Here's how you could do it:
+
+     <div class="orderedlist"><ol type="1"><li><p><a name="id2783069"></a>
+        Open the minibuffer by choosing <span class="guimenuitem">Enter Path...</span> from the
+        Window menu.
+        I usually bind this function to the slash (<span class="keycap">/</span>) key.
+      </p></li><li><p><a name="id2783097"></a>
+        Press <span class="keycap">CTRL</span>+<span class="keycap">U</span> to delete the existing contents
+        &#8212; this moves you to the root directory.
+      </p></li><li><p><a name="id2783119"></a>
+        Type <b><tt>u&lt;Tab&gt;do&lt;Tab&gt;wi&lt;Tab&gt;</tt></b>.
+        As you type, the cursor will move to the correct subdirectory.
+        If it beeps when you press Tab then you need to supply more letters.
+      </p></li></ol></div>
+
+   </p></div></div><div class="sect1"><a name="id2783137"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2783137"></a>The shell command box</h2></div></div><p>
+
+    This provides a quick way of entering shell commands if you don't
+    want to open an xterm. If you don't know what shell commands are,
+    skip this section!
+    </p><p>
+    Just type in the command and press <span class="keycap">Return</span> to execute it.
+    <span class="keycap">Up</span> and <span class="keycap">Down</span> arrows move through previously
+    entered commands.
+    <span class="keycap">Tab</span> does shell-style completion.
+    Clicking on an item inserts its name into the minibuffer.
+    If some items are selected then they are assigned to the positional
+    parameters <b><tt>$1</tt></b>, <b><tt>$2</tt></b>, etc.
+    </p><p>
+    Opening the minibuffer with a selection adds <tt>$@</tt>
+    to the end of the command &#8212; this expands to all the selected files.
+   </p><div class="informalexample" id="id2783212"><a name="id2783212"></a><p>Examples:
+
+     <div class="orderedlist"><p><b>To untar a 
+    `<tt class="filename">.tgz</tt>'
+   archive:</b></p><ol type="1"><li><p><a name="id2783235"></a>
+        Open the minibuffer by choosing <span class="guimenuitem">Shell Command...</span> from
+        the Window menu.
+        I usually bind this to the bang (<span class="keycap">!</span>) key.
+      </p></li><li><p><a name="id2783263"></a>
+        Type <b><tt>tar xzf</tt></b> and click on the file.
+        The leading space is automatically inserted.
+      </p></li><li><p><a name="id2783277"></a>
+        Press <span class="keycap">Return</span> to execute it.
+      </p></li></ol></div>
+
+     <div class="orderedlist"><p><b>To print all the selected files:</b></p><ol type="1"><li><p><a name="id2783302"></a>
+        Open the shell command minibuffer.
+      </p></li><li><p><a name="id2783308"></a>
+        Type <b><tt>lpr</tt></b> at the beginning of the line and press
+        <span class="keycap">Return</span>.
+      </p></li></ol></div>
+
+   </p></div><div class="itemizedlist"><p><b>Notes</b></p><ul><li><p><a name="id2783336"></a>
+      Be careful; you will not be asked to confirm! If in doubt, start the
+      command with <b><tt>xmessage</tt></b> so that it will be displayed
+      rather than executed.
+    </p></li><li><p><a name="id2783352"></a>
+      sh
+      is always used as the name of the shell to run (mainly because
+      bash and
+      csh treat
+      positional parameters differently).
+      However, <tt>PATH</tt> is searched to find it so you can still use
+      another shell if you want by naming it sh and putting it in your path.
+    </p></li><li><p><a name="id2783384"></a>
+      Commands execute in the background, so you can say:
+
+      <b>sleep 240; xmessage Time to go!</b>
+    </p></li></ul></div></div><div class="sect1"><a name="id2783400"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2783400"></a><a name="SelectIf"></a>The conditional
+    selection box</h2></div></div><p>
+
+    Use this if you want to automatically select all files in the directory
+    which match a condition.
+
+    <div class="orderedlist"><p><b>For example, to select all files larger than 5Mb:</b></p><ol type="1"><li><p><a name="id2783432"></a>
+       Open the Select If minibuffer.
+     </p></li><li><p><a name="id2783438"></a>
+       Type <b><tt>Size &gt; 5Mb</tt></b> and press <span class="keycap">Return</span>.
+     </p></li></ol></div>
+
+    Just those files over 5 Mb in size will be selected. The expressions
+    you can enter are in the same form as described in the
+    <a href="#Searching">Searching</a> section, except that
+    <b><tt>prune</tt></b> has no effect since the contents of
+    directories are never checked anyway. You can press <span class="keycap">Tab</span>
+    to jump to each selected file in turn.
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="actions"></a>Chapter 11. Action windows</h2></div></div><p>
+   Action windows are those boxes that appear while you're doing a
+   Copy/Move/Link/etc operation. The status line at the top of the window shows
+   the current directory or object that the window is processing. The scrolling
+   area below is the log area &#8212; it shows what has been done, and questions
+   may be displayed here.
+   <div class="mediaobject"><img src="../Action.png" align="center"></div>
+   </p><p>
+   Below this are four buttons and some options. All windows have the
+   
+    `<span class="guilabel">Quiet</span>'
+   option. When this is on the filer will only
+   confirm some operations (such as deleting a non-writeable file). Otherwise,
+   all operations are confirmed.
+   </p><p>
+   The buttons work as follows:
+
+   <div class="variablelist"><dl><dt><a name="id2783553"></a><span class="term"><span class="guibutton">Yes</span></span></dt><dd><p><a name="id2783562"></a>
+       answers yes to the question displayed in the log area.
+    </p></dd><dt><a name="id2783569"></a><span class="term"><span class="guibutton">No</span></span></dt><dd><p><a name="id2783577"></a>
+       answers no to the question displayed in the log area.
+    </p></dd><dt><a name="id2783584"></a><span class="term"><span class="guibutton">Abort</span></span></dt><dd><p><a name="id2783592"></a>
+       kills the current operation (if any) and closes the action
+       window.
+    </p></dd><dt><a name="id2783599"></a><span class="term"><span class="guibutton">Quiet</span></span></dt><dd><p><a name="id2783607"></a>
+       is a quick way to turn 
+    `<span class="guilabel">Quiet</span>'
+   on and click
+       <span class="guibutton">Yes</span>.
+    </p></dd></dl></div>
+
+   You can control which actions get started automatically (without you
+   having to click on <span class="guibutton">Quiet</span> at the start) from the
+   Options window.
+  </p><div class="sect1"><a name="id2783638"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2783638"></a>Action window options</h2></div></div><p>
+
+    Some actions have options, which appear as option boxes at the bottom
+    of the window. They are:
+
+    <div class="itemizedlist"><ul><li><p><a name="id2783654"></a>
+       
+    `<span class="guilabel">Force</span>'
+   means that the filer won't treat non-writeable
+       files as special.  Normally, it confirms the deletion even if
+       <span class="guibutton">Quiet</span> is pressed.
+       Note that you still can't remove files from non-writeable directories because
+       in that case you really don't have permission.
+     </p></li><li><p><a name="id2783679"></a>
+       
+    `<span class="guilabel">Brief</span>'
+   prevents the filer logging a message every time it
+       does something.  Use this to speed things up if large numbers of messages are
+       being logged.
+     </p></li><li><p><a name="id2783694"></a>
+       
+    `<span class="guilabel">Recurse</span>'
+   means that doing something to a directory will
+       also do the same thing to all its contents, and the contents of any
+       subdirectories, and so on.
+     </p></li></ul></div>
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="searching"></a>Chapter 12. <a name="Searching"></a>Searching</h2></div></div><p>
+
+   The Find feature looks through all the selected files and directories
+   and any subdirectories (recursively) looking for items that match
+   a particular expression.
+   </p><p>
+   If you know the name of a file then just enter it in the `Expression:'
+   box, enclosed in single quotes. For example, to find a file called
+   
+    `<tt class="filename">log</tt>'
+   you would enter <b><tt>'log'</tt></b>.
+
+   Remember to use normal quotes, not double quotes (&quot;) or back-quotes (`).
+   </p><p>
+   As the filer finds matching files they are added to the results list.
+   Clicking on an entry in the list opens a viewer showing the file you
+   clicked on. The filer will use the same window to view other results
+   (so, if you want the results shown in separate windows you must explicitly
+   create a new window from the Window menu).
+  </p><div class="sect1"><a name="id2783776"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2783776"></a>Wildcards</h2></div></div><p>
+
+    You can also put shell-style wildcard characters inside the quotes,
+    for example:
+
+    <table class="simplelist" border="0" summary="Simple list"><tr><td><b>'*.html'</b></td></tr><tr><td><b>'Report.*'</b></td></tr><tr><td><b>'Draft[1-5]'</b></td></tr><tr><td><b>'main.[ch]'</b></td></tr></table>
+
+    Look at the
+    glob(7)
+    manpage if you want to know more about shell wildcards.
+    </p><p>
+    If the pattern you enter contains a slash (`/') character then the
+    pattern is matched against the file's full path, otherwise only the
+    leafname is used. That is, <b><tt>'*tmp*'</tt></b> will find
+    
+    `<tt class="filename">tmp</tt>'
+   and 
+    `<tt class="filename">tmpfile</tt>'
+   but not
+    
+    `<tt class="filename">/tmp/file</tt>'
+   &#8212; <b><tt>'/*tmp*'</tt></b> will find
+    all three.
+   </p></div><div class="sect1"><a name="id2783882"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2783882"></a>Simple tests</h2></div></div><p>
+    As well as finding files by their names you can also find them by
+    various other attributes. Note that <i>file</i> is used here to
+    mean anything that can appear in the filesystem &#8212; including directories,
+    devices and so on.
+    </p><p>
+    You can also use a short form for each test; these are shown in brackets.
+    You can combine multiple tests &#8212; `<b><tt>-rw</tt></b>' is
+    the same as `<b><tt>IsReadable and IsWriteable</tt></b>'.
+   </p><div class="itemizedlist"><p><b>These look at the type of the item being checked:</b></p><ul><li><p><a name="id2783928"></a>
+      <b><tt>IsReg (-f)</tt></b> matches any regular (ie, normal) file.
+    </p></li><li><p><a name="id2783941"></a>
+      <b><tt>IsLink (-l)</tt></b> matches symlinks.
+    </p></li><li><p><a name="id2783954"></a>
+      <b><tt>IsDir (-d)</tt></b> matches directories.
+    </p></li><li><p><a name="id2783966"></a>
+      <b><tt>IsChar (-c)</tt></b> matches character device files.
+    </p></li><li><p><a name="id2783979"></a>
+      <b><tt>IsBlock (-b)</tt></b> matches block device files.
+    </p></li><li><p><a name="id2783992"></a>
+      <b><tt>IsDev (-D)</tt></b> matches block or character device files.
+    </p></li><li><p><a name="id2784005"></a>
+      <b><tt>IsPipe (-p)</tt></b> matches pipes.
+    </p></li><li><p><a name="id2784018"></a>
+      <b><tt>IsSocket (-S)</tt></b> matches sockets.
+    </p></li></ul></div><div class="itemizedlist"><p><b>These look at the permissions set on the file &#8212;
+     see the <a href="#Permissions">Permissions</a> section.</b></p><ul><li><p><a name="id2784046"></a>
+      <b><tt>IsSUID (-u)</tt></b> matches files which have the Set-UID
+      bit set.</p></li><li><p><a name="id2784059"></a>
+      <b><tt>IsSGID (-g)</tt></b> matches files which have the Set-GID
+      bit set.</p></li><li><p><a name="id2784073"></a>
+      <b><tt>IsSticky (-k)</tt></b> matches files with the sticky bit
+      set.</p></li><li><p><a name="id2784086"></a>
+      <b><tt>IsReadable (-r)</tt></b> matches files which you can read
+      from.</p></li><li><p><a name="id2784099"></a>
+      <b><tt>IsWriteable (-w)</tt></b> matches files which you can write to.
+    </p></li><li><p><a name="id2784112"></a>
+      <b><tt>IsExecutable (-x)</tt></b> matches files which you can execute.
+    </p></li></ul></div><div class="itemizedlist"><p><b>And a couple of other useful ones:</b></p><ul><li><p><a name="id2784132"></a>
+      <b><tt>IsEmpty (-z)</tt></b> finds empty files (ie, those whose
+      length is 0 bytes).
+    </p></li><li><p><a name="id2784147"></a>
+      <b><tt>IsMine (-o)</tt></b> finds files which you own.
+    </p></li></ul></div></div><div class="sect1"><a name="id2784161"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2784161"></a>Logic operators</h2></div></div><p>
+    You can combine the above tests in various ways to perform more advanced
+    searches.
+    An expression is actually made up of a list of <i>cases</i>,
+    separated by commas. The filer will try to match each case in turn
+    until one matches or there are no more cases left. For example, to
+    search for files with several possible endings:
+
+    <pre class="screen">'*.gif', '*.htm', '*.html'</pre>
+
+    Further, each of the cases is actually a list of conditions. The case
+    only matches if all of its conditions are met. So, to find a directory
+    called 
+    `<tt class="filename">lib</tt>'
+   or a regular file ending in
+    
+    `<tt class="filename">.so</tt>'
+  :
+
+    <pre class="screen">IsDir 'lib', IsReg '*.so'</pre>
+
+    You can negate a condition by putting a <b><tt>!</tt></b> in front
+    of it and you can use a sub-expression as a condition by bracketing it,
+    like this:
+
+    <pre class="screen">
+     !(IsDir, IsReg)
+
+     !IsDir !IsReg
+
+     Not isdir and not isreg
+
+     !-d !-f</pre>
+    All four do the same thing.
+   </p></div><div class="sect1"><a name="id2784235"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2784235"></a>Comparisons</h2></div></div><p>
+    You can also compare various values using the operators
+    <b><tt>&lt;</tt></b>,
+    <b><tt>&lt;=</tt></b>,
+    <b><tt>=</tt></b>,
+    <b><tt>!=</tt></b>,
+    <b><tt>&gt;</tt></b>, and
+    <b><tt>&gt;=</tt></b>
+    (for less-than, less-than-or-equal-to, equal-to,
+    not-equal-to, greater-than and greater-than-or-equal-to).
+
+    When comparing times, you may find it helpful to use
+    <b><tt>after</tt></b> and <b><tt>before</tt></b> instead of
+    <b><tt>&gt;</tt></b> and <b><tt>&lt;</tt></b> to make things
+    clearer.
+   </p><div class="itemizedlist"><p><b>
+     The following are read from the file being checked and may be used
+     for the values being compared:
+    </b></p><ul><li><p><a name="id2784326"></a>
+      <b><tt>atime</tt></b> The time that the file was last accessed.
+    </p></li><li><p><a name="id2784340"></a>
+      <b><tt>ctime</tt></b> The time that the file's status was last changed.
+    </p></li><li><p><a name="id2784353"></a>
+      <b><tt>mtime</tt></b> The time that the file's contents were last modified.
+    </p></li><li><p><a name="id2784366"></a>
+      <b><tt>size</tt></b> The size of the file.
+    </p></li><li><p><a name="id2784379"></a>
+      <b><tt>inode</tt></b> The file's inode (index) number.
+    </p></li><li><p><a name="id2784392"></a>
+      <b><tt>nlinks</tt></b> The number of links to this file. That is,
+      the number of directory entries which refer to this file. Note that
+      symlinks don't count as references.
+    </p></li><li><p><a name="id2784407"></a>
+      <b><tt>uid</tt></b> The User ID of the file.
+    </p></li><li><p><a name="id2784420"></a>
+      <b><tt>gid</tt></b> The Group ID of the file.
+    </p></li><li><p><a name="id2784433"></a>
+      <b><tt>blocks</tt></b> The number of disk blocks being used by the file.
+    </p></li></ul></div><p>
+    Times are measured as seconds since the Unix Epoch (00:00:00 UTC,
+    January 1, 1970). Sizes are in bytes. When specifying constants to
+    compare these values with you may use various keywords to scale the
+    value:
+
+    <div class="itemizedlist"><ul><li><p><a name="id2784457"></a>
+       <b><tt>Byte(s)</tt></b> has no effect, but looks better.
+     </p></li><li><p><a name="id2784471"></a>
+       <b><tt>Kb</tt></b> multiplies by 1024, so 2Kb is the same as 2048.
+     </p></li><li><p><a name="id2784484"></a>
+       <b><tt>Mb</tt></b> multiplies by 1024<sup>2</sup>,
+       ie 1024 Kb.
+     </p></li><li><p><a name="id2784500"></a>
+       <b><tt>Sec(s)</tt></b> has no effect, but looks nice.
+     </p></li><li><p><a name="id2784514"></a>
+       <b><tt>Min(s)</tt></b> multiplies by 60 to get minutes.
+     </p></li><li><p><a name="id2784527"></a>
+       <b><tt>Hour(s), Day(s), Week(s), Year(s)</tt></b> likewise
+       convert to the relevant unit.
+     </p></li><li><p><a name="id2784541"></a>
+       <b><tt>Ago</tt></b> makes the time in the past relative to when
+       the check is done.
+     </p></li><li><p><a name="id2784554"></a>
+       <b><tt>Hence</tt></b> makes the time in the future.
+     </p></li><li><p><a name="id2784567"></a>
+       <b><tt>Now</tt></b> is short for <b><tt>0 Secs Hence</tt></b>.
+     </p></li></ul></div>
+
+    Some examples should make this all a bit clearer!
+
+    <pre class="screen">
+     mtime after 1 day ago
+
+     size &gt; 10 Mb
+
+     IsReg and nlinks &gt; 1</pre>
+    The first finds files modified within the last 24 hours. You could
+    use <b><tt>&gt;</tt></b> instead of <b><tt>after</tt></b>,
+    but it's not so clear what is meant.
+    </p><p>
+    The second finds files larger than 10 Mb. The last finds regular files with
+    more than one directory entry.
+    </p><p>
+    Be careful though &#8212; the filer doesn't check the context of the
+    modifiers, so <b><tt>size &gt; 1 day ago</tt></b> is allowed,
+    although it doesn't make much sense!
+
+    Also, forgetting to use <b><tt>ago</tt></b> or
+    <b><tt>hence</tt></b> will cause odd effects (the time will be
+    measured relative to the Epoch rather than the current time).
+    Finally, don't use <b><tt>=</tt></b> with times &#8212;
+    <b><tt>atime = 1 day ago</tt></b> looks for a file accessed
+    <i>exactly</i> 86400 seconds ago...
+
+   </p></div><div class="sect1"><a name="id2784667"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2784667"></a>Specials</h2></div></div><p>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2784680"></a>
+       <b><tt>System(Command)</tt></b> executes `Command' on the file.
+       The test succeeds if the command returns an exit status of zero. A `%'
+       character in `Command' is replaced by the full path of the file being
+       checked.  <b><tt>System</tt></b> is a very slow test to perform,
+       so do it last if possible.  For example, if you're looking for a
+       
+    `<tt class="filename">.c</tt>'
+   file containing the word `main', do:
+
+       <pre class="screen">'*.c' system(grep -q main &quot;%&quot;)</pre>
+       so that the grep is only performed for files ending in 
+    `<tt class="filename">.c</tt>'
+  
+       (as opposed to only checking that the file ends in 
+    `<tt class="filename">.c</tt>'
+   if
+       it contains the word `main').
+     </p></li><li><p><a name="id2784737"></a>
+       <b><tt>Prune</tt></b> Always fails!
+       <sup>[<a name="id2784749" href="#ftn.id2784749">2</a>]</sup>
+
+       However, if it gets evaluated at all then it prevents the filer
+       from checking inside the current directory. Remember the order in which
+       the filer checks the expression!
+     </p></li></ul></div>
+
+    Examples:
+
+    <pre class="screen">
+     '*.old' system(rm '%')
+
+     'src' prune, '*.c'</pre>
+    The first deletes each file ending in 
+    `<tt class="filename">.old</tt>'
+  .
+    The second looks for 
+    `<tt class="filename">.c</tt>'
+   files, but does not bother
+    checking inside directories called 
+    `<tt class="filename">src</tt>'
+  .
+    The expression is evaluated like this:
+    </p><p>
+    If file is named 
+    `<tt class="filename">src</tt>'
+   then `Prune'.
+    Either way, check if it ends in 
+    `<tt class="filename">.c</tt>'
+   and include
+    it in the results if so.
+   </p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a name="ftn.id2784749" href="#id2784749">2</a>] </sup>Note that this is the opposite of the
+         find(1) command.</p></div></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="options"></a>Chapter 13. Options</h2></div></div><p>
+
+   You can configure various aspects of ROX-Filer
+   from the Options box.
+   Choose <span class="guimenuitem">Options...</span> from a filer window menu to
+   open it.
+
+   At the bottom of the window are four buttons:
+
+   <div class="itemizedlist"><ul><li><p><a name="id2784857"></a>
+      <span class="guibutton">Save</span>
+      puts all your choices into effect, and also saves them into
+      your Choices directory for next time ROX-Filer is
+      loaded. ROX-Filer will never save any preferences to
+      disk unless you click on the <span class="guibutton">Save</span> button in the options
+      window. Exactly where choices are loaded from and saved to is controlled by
+      the <tt>CHOICESPATH</tt> environment variable &#8212; see
+      [<a href="#id2789059">Choices</a>] for details.
+    </p></li><li><p><a name="id2784904"></a>
+      <span class="guibutton">OK</span>
+      puts your choices into effect without writing anything to disk.
+    </p></li><li><p><a name="id2784918"></a>
+      <span class="guibutton">Apply</span>
+      works like <span class="guibutton">OK</span>, but without closing the Options window.
+    </p></li><li><p><a name="id2784938"></a>
+      <span class="guibutton">Cancel</span>
+      closes the options box and forgets any changes you made.
+    </p></li></ul></div>
+
+   Many of the options in the Options window have tooltips &#8212; hold the
+   mouse pointer over the option to find out what it does.
+
+  </p><div class="sect1"><a name="id2784957"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2784957"></a>Translation options</h2></div></div><p>
+
+    You can choose which language the filer will display messages in from
+    here, or get it to read the LANG environment variable to get the desired
+    language.
+
+   </p></div><div class="sect1"><a name="id2784972"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2784972"></a>Display options</h2></div></div><p>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2784986"></a>
+    `<span class="guilabel">Ignore case when sorting</span>'
+  
+       treats upper and lower case letters as
+       equivalent when sorting. If this is off then 
+    `<tt class="filename">Zoo</tt>'
+   comes
+       before 
+    `<tt class="filename">animal</tt>'
+  , for example.
+     </p></li><li><p><a name="id2785013"></a>
+    `<span class="guilabel">Directories always come first</span>'
+   means that
+       all directories are sorted and displayed at the top, then all the other items
+       are sorted and displayed below. With this option off, directories are mixed in
+       with the other files.
+     </p></li><li><p><a name="id2785029"></a>
+    `<span class="guilabel">Large wrap width</span>'
+   sets the maximum width
+       for a file's name in `Large Icons' display mode before the text will wrap onto
+       two lines. In `Huge Icons' mode, the wrap width is 50% larger than this value.
+     </p></li><li><p><a name="id2785044"></a>
+    `<span class="guilabel">Max Small Icons width</span>'
+   &#8212; in
+       `Small Icons' mode, any text longer than this is chopped off (a red bar
+       indicates that some text is not shown). You can hold the mouse over the
+       truncated name to see the full text.
+     </p></li><li><p><a name="id2785059"></a>
+    `<span class="guilabel">Inherit options from source window</span>'
+  
+       controls what happens when you open a new window from an existing window
+       (eg, by clicking the middle button over a directory). If on, the new window
+       has the same options (icon size, sort order, etc) as the old window. If
+       off, the new window has the default options.</p></li><li><p><a name="id2785076"></a>
+    `<span class="guilabel">Default settings for new windows</span>'
+  .
+       The remaining options provide the default settings for newly opened
+       windows &#8212; they correspond to choosing styles from the
+       <span class="guimenuitem">Display</span> menu.
+     </p></li></ul></div>
+   </p></div><div class="sect1"><a name="id2785100"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785100"></a>Pinboard options</h2></div></div><p>
+
+    If you are using the pinboard features (see the <a href="#run_pin">Pinboard support</a>
+    section) then you can choose how the text under each icon is displayed. If
+    you have a fairly uniform background then you may like to choose 
+    `<span class="guilabel">No
+     background</span>'
+  , which simply draws the text directly over the desktop
+    background. However, users with more `noisy' backdrops may find such
+    text hard to read; selecting 
+    `<span class="guilabel">Rectangular background slab</span>'
+  
+    will draw a solid rectangle behind the text to make it easier to read.
+    When using Gtk+-2.0, this option has no effect.
+    </p><p>
+    You may also change the foreground and background colours used for
+    the text by clicking on the colour slabs in the Options window.
+
+    <div class="itemizedlist"><ul><li><p><a name="id2785148"></a> 
+    `<span class="guilabel">Single-click to open</span>'
+  
+       allows you to open a file or directory just by clicking on it. Hold down
+       <span class="keycap">Control</span> to select things. If this is off, clicking selects
+       and double-clicking opens.
+     </p></li><li><p><a name="id2785171"></a>
+    `<span class="guilabel">Keep icons within screen limits</span>'
+  
+       prevents icons from going partly off the side of the screen.
+     </p></li><li><p><a name="id2785184"></a> 
+    `<span class="guilabel">Icon grid step</span>'
+   controls how finely
+       the icons may be positioned.</p></li></ul></div>
+
+   </p></div><div class="sect1"><a name="id2785200"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785200"></a>Panel options</h2></div></div><p>
+
+    If you are using panels (see the <a href="#run_pan">Panel support</a> section)
+    then this section lets you choose which icons will have textual labels
+    underneath them.
+    You can have labels on all icons, on no icons, or on all icons except
+    applications.
+
+   </p></div><div class="sect1"><a name="id2785223"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785223"></a>Action window options</h2></div></div><p>
+
+    You can choose to start some operations automatically, without waiting
+    for you to click on <span class="guibutton">Quiet</span>.
+    Select each operation that you want to
+    auto-start here. You can also set the default state for each of the
+    options that appear inside action windows.
+
+   </p></div><div class="sect1"><a name="id2785247"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785247"></a>Toolbar options</h2></div></div><p>
+    The toolbar is described in the <a href="#Toolbar">Toolbar</a> section.
+    <div class="itemizedlist"><ul><li><p><a name="id2785270"></a> 
+    `<span class="guilabel">Unshade the tools you want:</span>'
+   allows
+       you to set which tools should appear on the toolbar. Click on the
+       buttons below to shade and unshade them &#8212; shaded tools will not be
+       shown on filer window toolbars.
+     </p></li><li><p><a name="id2785287"></a> 
+    `<span class="guilabel">Toolbar type</span>'
+   allows you to choose
+       what kind of toolbars you want.
+       <span class="guimenuitem">None</span> means that windows will not have a
+       toolbar,
+       <span class="guimenuitem">Normal</span> provides a small bar of icons, and
+       <span class="guimenuitem">Large</span> displays larger buttons, with textual labels.
+     </p></li><li><p><a name="id2785323"></a> 
+    `<span class="guilabel">Show totals of items</span>'
+   shows the
+       number of items displayed in a filer window, as well as the number of
+       hidden items (if any) on the toolbar.  When there's a selection, it
+       shows the number of selected items and their combined size (excluding
+       directories).
+     </p></li></ul></div>
+
+   </p></div><div class="sect1"><a name="id2785344"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785344"></a>Filer window options</h2></div></div><p>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2785357"></a>
+    `<span class="guilabel">Automatically resize filer windows</span>'
+   can be
+       used to control when windows are automatically resized:
+
+       <div class="itemizedlist"><ul><li><p><a name="id2785373"></a>
+    `<span class="guilabel">...never</span>'
+  
+          turns off auto-resizing. Windows must be
+          resized manually.
+        </p></li><li><p><a name="id2785386"></a>
+    `<span class="guilabel">...when changing the display style</span>'
+  
+          will resize the
+          window automatically when you change the icon size or the type of
+          details to be displayed.
+        </p></li><li><p><a name="id2785400"></a>
+    `<span class="guilabel">...always</span>'
+  
+          causes the window to resize whenever it
+          seems useful (that is, when changing to a different directory or when
+          switching between display styles).
+        </p></li></ul></div>
+
+     </p></li><li><p><a name="id2785416"></a> 
+    `<span class="guilabel">Window size limit</span>'
+   sets the largest size
+       (as a percentage of the screen size) that the auto-resizer will resize windows
+       to.
+     </p></li><li><p><a name="id2785431"></a> 
+    `<span class="guilabel">Unique windows</span>'
+   prevents you from having
+       two windows showing the same directory. Opening a second view onto a directory
+       closes the first.
+     </p></li><li><p><a name="id2785446"></a> 
+    `<span class="guilabel">New window on button 1</span>'
+   swaps the
+       actions of the two non-menu buttons when opening directories. This is
+       provided for people who are used to the RISC OS mouse bindings.
+     </p></li><li><p><a name="id2785462"></a> 
+    `<span class="guilabel">Single-click navigation in filer windows</span>'
+  
+       means that clicking on a file or directory will open it. If off, clicking on
+       files selects them instead &#8212; you must double click on a file to open it.
+     </p></li></ul></div>
+
+    The next two options control what happens when you press <span class="keycap">Tab</span>
+    in the path entry minibuffer:
+
+    <div class="itemizedlist"><ul><li><p><a name="id2785490"></a> 
+    `<span class="guilabel">Beep if Tab-completion fails</span>'
+   &#8212; beep
+       if there is no match, or there are several possible completions, each starting
+       differently.
+     </p></li><li><p><a name="id2785505"></a> 
+    `<span class="guilabel">Beep if there are several matches</span>'
+   &#8212;
+       beep if there are several matches, even though some letters were added.
+     </p></li></ul></div>
+
+   </p></div><div class="sect1"><a name="id2785523"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785523"></a>Drag-And-Drop options</h2></div></div><p>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2785536"></a>ROX-Filer uses the standard
+       XDND protocol for drag-and-drop. This protocol recommends that URIs
+       should contain the hostname of the computer that the resource is on so
+       that the program receiving the data can determine whether it can get the
+       data directly or whether it must go via the X-server. However, many
+       older programs (particularly GNOME applications) get confused by the
+       hostname and fail to load the data correctly. If 
+    `<span class="guilabel">Don't use
+        hostnames</span>'
+   is on then the hostname part is omitted and
+       ROX-Filer will work with these applications
+       BUT you can't drag data to a program running on a different machine.
+     </p></li><li><p><a name="id2785573"></a>
+    `<span class="guilabel">Allow dragging to icons in filer
+        windows</span>'
+   controls what happens when you drop files onto icons
+       in filer windows. If on then drops onto directories will save the data
+       inside the directory, while dropping onto programs will invoke the
+       program on that data. If off then drops anywhere inside a filer window
+       act like drops onto the window background &#8212; that is, the data will
+       be saved into the directory being displayed.
+     </p></li><li><p><a name="id2717986"></a>
+    `<span class="guilabel">Directories spring open</span>'
+   controls what
+       happens when you hold a file over a directory while dragging it. If on,
+       the directory will `spring open' after a short pause, allowing you to
+       navigate to any directory during a drag. You can also hold the pointer
+       over the Home and Up buttons on the toolbar for a similar effect. You
+       need to have the previous option enabled for this to have any effect on
+       files displayed in a directory.
+     </p></li><li><p><a name="id2718005"></a>
+    `<span class="guilabel">Spring delay</span>'
+   sets how long, in
+       thousanths of a second, the filer will wait before spring opening a
+       directory as described above. If the above option is turned off, then
+       this has no effect.
+     </p></li><li><p><a name="id2718020"></a>
+    `<span class="guilabel">Dragging files with the middle mouse button...</span>'
+  
+       you can choose whether this displays a menu (like <span class="keycap">Alt</span>
+       dragging) or moves the files (like <span class="keycap">Shift</span> dragging).
+     </p></li></ul></div>
+
+   </p></div><div class="sect1"><a name="id2718050"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2718050"></a>Menu options</h2></div></div><p>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2718064"></a>
+    `<span class="guilabel">Xterm here program</span>'
+   is the command
+       used when you choose <span class="guimenuitem">Xterm here</span> from the
+       menu. You can replace it with another command such as
+       <b>gnome-terminal</b>, <b>konsole</b>, or
+       anything else.</p></li><li><p><a name="id2718098"></a>
+    `<span class="guilabel">Size of icons in menus</span>'
+   controls the
+       size of the icons in the <span class="guimenuitem">Send To</span> and
+       <span class="guimenuitem">New</span> menus.</p></li><li><p><a name="id2718123"></a>
+    `<span class="guilabel">Menu on button 2</span>'
+   swaps the actions
+       of buttons 2 and 3 so that the middle button brings up the menus. This
+       is provided for people who are used to the RISC OS mouse bindings.
+       </p><p>
+       As an alternative to using the options window to put menu on button-2,
+       some people prefer to use the command <b>xmodmap -e &quot;pointer
+	= 1 3 2&quot;</b>, which makes the right mouse button button-2 and
+       the middle one button-3 (this affects all programs, not just
+       ROX-Filer).
+     </p></li></ul></div>
+   </p></div><div class="sect1"><a name="id2785923"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2785923"></a>Types</h2></div></div><p>
+    <div class="itemizedlist"><ul><li><p><a name="id2785937"></a>
+    `<span class="guilabel">Ignore eXecutable bit for known
+        extensions</span>'
+   means that when a file has a known extension (eg
+       
+    `<tt class="filename">.gif</tt>'
+  ) the executable bit is ignored. This is useful
+       if you have files on a Windows-type filesystem which are being shown as
+       executable programs. However, it prevents a file such as
+       
+    `<tt class="filename">script.sh</tt>'
+   from being treated as a program.
+     </p></li><li><p><a name="id2785968"></a>
+    `<span class="guilabel">Colour files based on their types</span>'
+  .
+       If on, each file's name is coloured depending on what kind of thing it is
+       (regular file, directory, executable, etc). You can choose the colours from
+       the list below.
+     </p></li></ul></div>
+
+    The MIME type system used in the filer is described more fully in
+    <a href="#types" title="Chapter 14. Filetypes">Chapter 14. Filetypes</a>.
+    <div class="itemizedlist"><ul><li><p><a name="id2785996"></a><span class="guibutton">Show name-to-type rules</span>
+       opens the directories containing the files which tell the filer what
+       type to give each file.</p></li><li><p><a name="id2786009"></a><span class="guibutton">Re-read files</span> causes the filer to
+       reread these files after you've finished changing them.
+     </p></li></ul></div>
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="types"></a>Chapter 14. Filetypes</h2></div></div><p>
+
+   All files have a MIME type in the form <i>text/plain</i>. Here,
+   <i>text</i> is the <i>media type</i> and
+   <i>plain</i> is the <i>sub-type</i>.
+   </p><p>
+   ROX-Filer uses a file's name to decide what its MIME
+   type is, and then uses the MIME type to decide what icon to give it and what
+   program to use when you open the file.
+  </p><div class="sect1"><a name="id2786075"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786075"></a><a name="RunAction"></a>
+    The run action box
+   </h2></div></div><p>
+
+    This box appears when you choose <span class="guimenuitem">Set Run Action...</span>
+    from the File menu, and is used to set which application is loaded when you click
+    on a file.
+    </p><p>
+    For example, let's say you want to set things up so that opening a
+    
+    `<tt class="filename">.gif</tt>'
+   file loads it into the Gimp.
+    First, right-click over a gif image to open the menu and choose
+    <span class="guimenuitem">Set Run Action...</span> from the
+    <span class="guimenuitem">File</span> submenu.
+    Then, you have a choice of two methods to set the run action:
+   </p><div class="sect2"><a name="id2786132"></a><div class="titlepage"><div><h3 class="title"><a name="id2786132"></a>Setting the run action by drag-and-drop</h3></div></div><p>
+     Drag the Gimp (from a filer window, a panel or the pinboard) onto
+     the area marked 
+    `<span class="guilabel">Drop a suitable application here</span>'
+  .
+     From now on, clicking on a GIF file will load it into the Gimp.
+    </p></div><div class="sect2"><a name="id2786154"></a><div class="titlepage"><div><h3 class="title"><a name="id2786154"></a>Setting the run action by entering a shell command</h3></div></div><p>
+     Type: <b><tt>gimp &quot;$1&quot;</tt></b>
+     into the box labelled 
+    `<span class="guilabel">Enter a shell command</span>'
+   and press
+     <span class="keycap">Return</span>. <b><tt>$1</tt></b>
+     will be replaced by the name of the file you click on when this command
+     is used. As before, clicking on any GIF image will now load it into
+     the Gimp.
+    </p></div><div class="sect2"><a name="id2786197"></a><div class="titlepage"><div><h3 class="title"><a name="id2786197"></a>Setting the default media-type handlers</h3></div></div><p>
+     Whichever method you use to set the action you have the choice of
+     setting the run action just for that type, or setting the default
+     for all files with that media-type which don't already have a specific
+     action.
+     </p><p>
+     Since the Gimp can load many types of image, it makes sense
+     to select the 
+    `<span class="guilabel">Set default for all `image/&lt;anything&gt;'</span>'
+  
+     option so you don't have to do it again for image/jpeg files and so on. However,
+     this only affects types that don't already have a specific action
+     (ie, those that would have brought up an error box if you tried to
+     open them).
+    </p></div></div><div class="sect1"><a name="id2786231"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786231"></a><a name="SetIcon"></a>
+    The Set Icon box
+   </h2></div></div><p>
+
+    This box appears when you choose <span class="guimenuitem">Set Icon...</span>
+    from the File menu, and is used to set which image to use to represent
+    the file.
+    </p><p>
+    It works much like the Set Run Action box described above, except that
+    you may specifiy an icon for one file individually (by name) as well as
+    for all files of a particular type.
+    </p><p>
+    The directory icon inside the 
+    `<span class="guilabel">Drop an icon here</span>'
+  
+    area allows you to quickly get to a directory from which you are already
+    using one or more icons.
+   </p></div><div class="sect1"><a name="id2786279"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786279"></a>How filetypes are stored</h2></div></div><p>
+
+    ROX-Filer uses three sub-directories in your Choices
+    directory for filetypes:
+
+    <div class="variablelist"><dl><dt><a name="id2786302"></a><span class="term">
+    `<tt class="filename">MIME-info</tt>'
+  </span></dt><dd><p><a name="id2786310"></a>
+        contains files which specify what the MIME types for files
+        should be, based on their extentions. All the files in all the
+        
+    `<tt class="filename">MIME-info</tt>'
+   directories are scanned when the filer loads.
+        ROX-Filer comes with a file containing many such
+        rules &#8212; this is installed into the 
+    `<tt class="filename">MIME-info</tt>'
+  
+        directory by the rox-base package.
+        </p><p>
+        Many applications now come with a file called
+        
+    `<tt class="filename">something.mime</tt>'
+  ; copy these files into your
+        
+    `<tt class="filename">MIME-info</tt>'
+   directory to make
+        ROX-Filer automatically recognise the new extensions.
+        ROX-Filer doesn't automatically re-read these files when they change. You can
+        either restart the filer, or click on the <span class="guibutton">Re-read files</span>
+        button in the 
+    `<span class="guilabel">Types</span>'
+   section of the Options box.
+     </p></dd><dt><a name="id2786385"></a><span class="term">
+    `<tt class="filename">MIME-types</tt>'
+  </span></dt><dd><p><a name="id2786393"></a>
+        contains symlinks, one for each MIME type, which point
+        to programs that can handle files of that type. To set what program
+        is run when you click on the file you should normally use the <span class="guimenuitem">Set
+         Run Action...</span> feature (see the <a href="#RunAction">the Set Run Action box</a> section).
+        However, you can also set the actions manually &#8212; for example, to make
+        opening an HTML file load it into Netscape:
+
+        <div class="orderedlist"><ol type="1"><li><p><a name="id2786427"></a>
+           Find the Netscape application and go to <span class="guimenuitem">Link...</span>
+           on the menu.
+         </p></li><li><p><a name="id2786441"></a>
+           Enter <b><tt>text_html</tt></b> as the name for the link and drag the
+           icon from the Link box into the 
+    `<tt class="filename">MIME-types</tt>'
+   directory.
+         </p></li></ol></div>
+
+        You can also put actual programs in here as well as links if you want
+        to.
+     </p></dd><dt><a name="id2786466"></a><span class="term">
+    `<tt class="filename">MIME-icons</tt>'
+  </span></dt><dd><p><a name="id2786473"></a>
+        contains the images used to display each type of file.
+        So the filer will try to display an HTML file using the icon
+        
+    `<tt class="filename">MIME-icons/text_html.xpm</tt>'
+  .
+     </p></dd></dl></div>
+
+    In both 
+    `<tt class="filename">MIME-types</tt>'
+   and 
+    `<tt class="filename">MIME-icons</tt>'
+  
+    directories you can also provide default actions/images for each media type.
+    For example, if 
+    `<tt class="filename">text_html</tt>'
+   isn't found then the filer
+    will try simply using 
+    `<tt class="filename">text</tt>'
+  .
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="appdirs"></a>Chapter 15. <a name="AppDir"></a>
+   Application directories
+  </h2></div></div><p>
+   An application directory is a directory which can be run as an application.
+   It contains all the resources of an application &#8212; source code, binaries,
+   documentation and so on. Keeping everything in one place make installation
+   and uninstallation much easier for users. You can also keep multiple
+   versions of a program by simply having several application directories.
+   You may move and rename them as you please. Application directories
+   make programs easier to use and install.
+   </p><p>
+   They're more secure too, because you can compile an application as a user and
+   then simply copy it as root. Since you don't have to run an install script
+   you are free from the danger of running untrusted code as root. All you have
+   to watch out for is setuid binaries.
+   </p><p>
+
+   The following files are treated as special by
+   ROX-Filer:
+
+   <div class="itemizedlist"><ul><li><p><a name="id2786576"></a>
+      
+    `<tt class="filename">AppRun</tt>'
+  
+      is executed when you click on the directory &#8212; make sure
+      it is executable (use the Permissions box)!
+    </p></li><li><p><a name="id2786588"></a>
+      
+    `<tt class="filename">.DirIcon</tt>'
+  
+      is the image used to represent the directory (this works even if
+      there is no 
+    `<tt class="filename">AppRun</tt>'
+  ).
+    </p></li><li><p><a name="id2786611"></a>
+      
+    `<tt class="filename">Help</tt>'
+  
+      is the directory to be opened when you choose <span class="guimenuitem">Help</span>
+      from the File menu.
+    </p></li><li><p><a name="id2786632"></a>
+      
+    `<tt class="filename">AppInfo.xml</tt>'
+  
+      contains extra information about an application (see below).
+    </p></li><li><p><a name="id2786645"></a>
+      
+    `<tt class="filename">AppIcon.xpm</tt>'
+  
+      is used if 
+    `<tt class="filename">.DirIcon</tt>'
+   is missing (for backwards
+      compatibility).
+    </p></li></ul></div>
+
+   Have a look at the 
+    `<tt class="filename">ROX-Filer</tt>'
+   application directory for a
+   full example.
+
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a name="id2786675"></a>Note</h3><p>For security reasons, an application directory must have the
+    same owner as the 
+    `<tt class="filename">AppRun</tt>'
+   file inside.</p></div><div class="sect1"><a name="id2786689"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786689"></a>The AppInfo file</h2></div></div><p>
+
+    
+    `<tt class="filename">AppInfo.xml</tt>'
+   is an XML file with the following structure
+    (any elements may be omitted, and the file itself is optional):
+
+    <pre class="screen">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;AppInfo&gt;
+  &lt;Summary&gt;A graphical file manager&lt;/Summary&gt;
+  &lt;About&gt;
+    &lt;Purpose&gt;File manager&lt;/Purpose&gt;
+    &lt;Version&gt;1.1.3 (07-May-2001)&lt;/Version&gt;
+    &lt;Authors&gt;Thomas Leonard and others&lt;/Authors&gt;
+    &lt;License&gt;GNU General Public License&lt;/License&gt;
+    &lt;Homepage&gt;http://rox.sourceforge.net&lt;/Homepage&gt;
+  &lt;/About&gt;
+  &lt;AppMenu&gt;
+   &lt;Item label=&quot;Enable pinboard&quot; option=&quot;-p=Default&quot;/&gt;
+   &lt;Item label=&quot;Disable pinboard&quot; option=&quot;-p=&quot;/&gt;
+  &lt;/AppMenu&gt;
+&lt;/AppInfo&gt;</pre>
+
+    <div class="itemizedlist"><ul><li><p><a name="id2786728"></a>
+       <b><tt>Summary</tt></b>
+       is displayed in a tooltip when the mouse is held over the application.
+     </p></li><li><p><a name="id2786742"></a>
+       <b><tt>About</tt></b>
+       contains a list of fields which are shown in the `File Info'
+       box for the application (any element names may be used, but the above
+       are suggested).
+     </p></li><li><p><a name="id2786757"></a>
+       <b><tt>AppMenu</tt></b>
+       is a list of extra menu items to display for the application.
+       When one is chosen, 
+    `<tt class="filename">AppRun</tt>'
+   is called with
+       <b><tt>option</tt></b> as its only argument. You can nest
+       AppMenus inside other AppMenus.
+     </p></li></ul></div>
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="i18n"></a>Chapter 16. Internationalisation</h2></div></div><p>
+
+  </p><div class="sect1"><a name="id2786806"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786806"></a><a name="LANG"></a>
+    Selecting a translation
+   </h2></div></div><p>
+
+    ROX-Filer is able to translate many of its messages,
+    provided suitable translation files are provided:
+
+    <div class="orderedlist"><ol type="1"><li><p><a name="id2786842"></a>Open the Options box from the menu,</p></li><li><p><a name="id2786848"></a>Select a language from the menu at the top,</p></li><li><p><a name="id2786854"></a>Click on <span class="guibutton">Save</span> and restart the filer
+       for the new setting to take full effect.</p></li></ol></div>
+
+   </p></div><div class="sect1"><a name="id2786871"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2786871"></a>Creating a new translation</h2></div></div><p>
+
+    <div class="orderedlist"><ol type="1"><li><p><a name="id2786890"></a>Go into the 
+    `<tt class="filename">src</tt>'
+   directory and create
+       the file 
+    `<tt class="filename">messages.pot</tt>'
+  :
+
+       <pre class="screen">
+        $ cd ROX-Filer/src
+        $ make messages.pot</pre>
+
+     </p></li><li><p><a name="id2786918"></a>Copy the file into the 
+    `<tt class="filename">po</tt>'
+  
+       subdirectory under 
+    `<tt class="filename">src</tt>'
+   as
+       
+    `<tt class="filename">&lt;name&gt;.po</tt>'
+  . Eg, if your
+       language is referred to as `ml' (`my language'):
+
+       <pre class="screen">$ cp messages.pot po/ml.po</pre>
+     </p></li><li><p><a name="id2786953"></a>Load the copy into a text editor.</p></li><li><p><a name="id2786959"></a>Fill in the translations, which are all blank to start with.
+     </p></li><li><p><a name="id2786966"></a>Run the 
+    `<tt class="filename">make-mo</tt>'
+   script to create the
+       binary file which ROX-Filer can use.
+       You will need the GNU gettext package for this.
+       If you don't have it then just send me the 
+    `<tt class="filename">.po</tt>'
+   file
+       and I'll convert it for you.
+
+       <pre class="screen">
+        $ cd ROX-Filer/src/po
+        $ ./make-mo ml
+        Created file ../../Messages/ml.gmo OK</pre>
+     </p></li><li><p><a name="id2787004"></a>Edit 
+    `<tt class="filename">ROX-Filer/Options.xml</tt>'
+   so that
+       your language is listed, restart the filer and select it from the Options box
+       (see the <a href="#LANG">Translations</a> section).
+     </p></li><li><p><a name="id2787027"></a>Submit the 
+    `<tt class="filename">.po</tt>'
+   file to me so that I
+       can include it in future releases of the filer.
+     </p></li></ol></div>
+   </p></div><div class="sect1"><a name="id2787043"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2787043"></a>Updating an existing translation</h2></div></div><p>
+
+    <div class="orderedlist"><ol type="1"><li><p><a name="id2787062"></a>Go into the directory containing the 
+    `<tt class="filename">.po</tt>'
+  
+       files and run the 
+    `<tt class="filename">update-po</tt>'
+   script.
+       This checks the source code for new and changed strings and updates all
+       the translation files.
+
+       <pre class="screen">
+        $ cd ROX-Filer/src/po
+        $ ./update-po</pre>
+     </p></li><li><p><a name="id2787093"></a>Edit the file by hand as before, filling in the new blanks
+       and updating out-of-date translations.
+       Look out for <tt>fuzzy</tt> entries where
+       <b>update-po</b> has made a guess; check it's correct and
+       remove the <tt>fuzzy</tt> line.
+     </p></li><li><p><a name="id2787123"></a>Run <b>make-mo</b> as before.</p></li><li><p><a name="id2787135"></a>Submit the updated file to me.</p></li></ol></div>
+
+    See the <b>gettext</b> info page for more instructions on creating
+    a translation.
+
+   </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="hacking"></a>Chapter 17. Hacking</h2></div></div><p>
+   This is a quick start guide for people who want to modify the source
+   code. If you make useful changes or fix bugs, please send patches
+   to me or to the mailing list. Tell me which version you're using!
+  </p><div class="sect1"><a name="id2787172"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2787172"></a>Compiling</h2></div></div><p>
+    The first time you compile the program you need to do <b>AppRun
+     --compile</b>, but in future you only need to run <b>make</b>
+    in the 
+    `<tt class="filename">src</tt>'
+   directory when you change the
+    
+    `<tt class="filename">.c</tt>'
+   and 
+    `<tt class="filename">.h</tt>'
+   files.
+    You might want to run <b>make depend</b> too.
+   </p></div><div class="sect1"><a name="id2787228"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2787228"></a>Creating and applying patches</h2></div></div><p>
+    When people make small modifications to the sources they will often
+    distribute them as <i>patch files</i> &#8212; usually on the
+    mailing list.
+
+    To apply a patch, go into the 
+    `<tt class="filename">src</tt>'
+   directory and run
+    <b>patch</b> with the patch file. Then recompile, like this:
+
+    <pre class="screen">
+     $ cd ROX-Filer/src
+     $ patch &lt; patchfile
+     $ ../AppRun --compile</pre>
+
+    You can remove the patch by simply repeating the above sequence &#8212;
+    <b>patch</b> will detect that the patch is already applied
+    and offer to remove it.
+    </p><p>
+    To create a patch you should first get the latest version of the filer
+    from CVS (instructions on using CVS can be found on the web-site).
+    Modify the program as you please. Create the patch using
+    <b>cvs diff</b> from the appropriate directory:
+
+    <pre class="screen">$ cvs diff -u &gt; my_patch</pre>
+
+    This creates a human&#8211; and machine-readable patch file. Submit this
+    to the mailing list. The are many reasons for posting patches rather
+    that the modified files:
+
+    <div class="itemizedlist"><ul><li><p><a name="id2787307"></a>They are smaller, and hence shouldn't bounce.
+       They are also quicker to download for people with slow connections.
+     </p></li><li><p><a name="id2787315"></a>People can see what they're getting into before applying them!
+     </p></li><li><p><a name="id2787322"></a>Patches can (usually) be applied to slightly modified
+       versions of the sources. This means that people can apply several patches
+       without each new one overwriting the others.
+     </p></li></ul></div>
+
+   </p></div><div class="sect1"><a name="id2787334"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2787334"></a>Autoconf</h2></div></div><p>
+    Here's a quick explanation of the autoconf system in case you haven't
+    used it before. See <b>info autoconf</b> for full details.
+    </p><p>
+    There's a file called 
+    `<tt class="filename">configure.in</tt>'
+   which contains
+    various tests (<b>info autoconf</b>).
+    You run <b>autoconf</b> and it reads through the file
+    and generates a shell script to perform the tests, saving it as
+    
+    `<tt class="filename">configure</tt>'
+  .
+    
+    `<tt class="filename">configure</tt>'
+   is normally distributed with the program because
+    not everyone has autoconf.
+    </p><p>
+    You then run 
+    `<tt class="filename">configure</tt>'
+   (in fact, let the
+    
+    `<tt class="filename">AppRun</tt>'
+   script do it because
+    it passes it some arguments), which performs all the tests. It reads
+    in 
+    `<tt class="filename">Makefile.in</tt>'
+   and 
+    `<tt class="filename">config.h.in</tt>'
+  
+    and fills in the missing values with the test results to produce
+    
+    `<tt class="filename">Makefile</tt>'
+   and 
+    `<tt class="filename">config.h</tt>'
+  .
+    </p><p>
+    You run <b>make</b>, which creates 
+    `<tt class="filename">.o</tt>'
+  
+    files from the 
+    `<tt class="filename">.c</tt>'
+   files and links to produce
+    
+    `<tt class="filename">ROX-Filer</tt>'
+  .
+   </p></div><div class="sect1"><a name="id2787475"></a><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="id2787475"></a>Data-structures</h2></div></div><p>
+    The 
+    `<tt class="filename">global.h</tt>'
+   file lists each major data-structure used
+    in the filer and explains its purpose. This is a good place to start reading
+    if you want to know how the filer works.
+   </p><p>
+    In summary, each window has its own <tt>FilerWindow</tt>
+    structure.
+    This structure has pointers to a <tt>Collection</tt>
+    (which is the widget which actually displays the files) and to a
+    <tt>Directory</tt>, which is used to cache the directory
+    contents.
+    </p><p>
+    Both <tt>Collection</tt> and
+    <tt>Directory</tt> have pointers to (the same)
+    <tt>DirItem</tt>s, each of which corresponds to one filesystem
+    object.
+    </p><p>
+    Several <tt>FilerWindow</tt>s may share the same
+    <tt>Directory</tt>.
+    </p><p>
+    While scanning is in progress the <tt>Directory</tt>
+    keeps a list of the new items it has found
+    (<i>new_items</i>) and the items which have changed in some way
+    (<i>up_items</i>). It periodically notifies the filer window of
+    the changes-so-far by calling all the functions in the
+    <i>users</i> list (use <span class="function">attach()</span>
+    and <span class="function">detach()</span> to add and remove functions to or from
+    the list).
+   </p></div></div><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="manpage"></a>Appendix A. Manual page</h2></div></div><div class="refentry"><h1 class="title"><a name="rox"></a>ROX</h1><div class="refnamediv"><a name="id2787613"></a><h2>Name</h2>ROX-Filer &#8212; a simple graphical file manager</div><div class="refsynopsisdiv"><a name="id2787626"></a><h2>Synopsis</h2><div class="cmdsynopsis" id="id2787629"><a name="id2787629"></a><tt>rox</tt>  [<tt>OPTION</tt>...] [FILE...]</div></div><div class="refsect1"><a name="id2787665"></a><h2><a name="id2787665"></a>DESCRIPTION</h2><p>
+     ROX-Filer is a simple and easy to use graphical file manager for X11, the
+     windowing system used on Unix and Unix-like operating systems.
+     </p><p>
+     It is also the core component of the ROX Desktop:
+     <a href="http://rox.sourceforge.net" target="_top">http://rox.sourceforge.net</a>
+     </p><p>
+     Invoking <b>rox</b> opens each directory or file listed,
+     or the current working directory if no arguments are given.
+    </p></div><div class="refsect1"><a name="id2787699"></a><h2><a name="id2787699"></a>COMMAND-LINE OPTIONS</h2><p>
+     <div class="variablelist"><dl><dt><a name="id2787712"></a><span class="term"><tt>-b</tt>, </span><span class="term"><tt>--bottom=PANEL</tt></span></dt><dd><p><a name="id2787724"></a>open PANEL as a bottom-edge panel.
+      </p></dd><dt><a name="id2787730"></a><span class="term"><tt>-c</tt>, </span><span class="term"><tt>--client-id=ID</tt></span></dt><dd><p><a name="id2787741"></a>used for session management.
+      </p></dd><dt><a name="id2787748"></a><span class="term"><tt>-d</tt>, </span><span class="term"><tt>--dir=DIR</tt></span></dt><dd><p><a name="id2787759"></a>open DIR as directory (not as an application, even if it looks like one).
+      </p></dd><dt><a name="id2787766"></a><span class="term"><tt>-D</tt>, </span><span class="term"><tt>--close=DIR</tt></span></dt><dd><p><a name="id2787777"></a>close DIR and all its subdirectories.
+      </p></dd><dt><a name="id2787783"></a><span class="term"><tt>-h</tt>, </span><span class="term"><tt>--help</tt></span></dt><dd><p><a name="id2787794"></a>display help about the various options.
+      </p></dd><dt><a name="id2787801"></a><span class="term"><tt>-l</tt>, </span><span class="term"><tt>--left=PANEL</tt></span></dt><dd><p><a name="id2787812"></a>open PANEL as a left-edge panel.
+      </p></dd><dt><a name="id2787818"></a><span class="term"><tt>-m</tt>, </span><span class="term"><tt>--mime-type=FILE</tt></span></dt><dd><p><a name="id2787830"></a>print MIME type of FILE and exit.
+      </p></dd><dt><a name="id2787836"></a><span class="term"><tt>-n</tt>, </span><span class="term"><tt>--new</tt></span></dt><dd><p><a name="id2787847"></a>start a new filer, even if one already seems to be running. This also prevents the filer from forking (running in the background), which is useful for debugging.
+      </p></dd><dt><a name="id2787856"></a><span class="term"><tt>-o</tt>, </span><span class="term"><tt>--override</tt></span></dt><dd><p><a name="id2787867"></a>override window manager control of panels.
+      </p></dd><dt><a name="id2787873"></a><span class="term"><tt>-p</tt>, </span><span class="term"><tt>--pinboard=PIN</tt></span></dt><dd><p><a name="id2787884"></a>use pinboard PIN as the pinboard.
+      </p></dd><dt><a name="id2787891"></a><span class="term"><tt>-r</tt>, </span><span class="term"><tt>--right=PANEL</tt></span></dt><dd><p><a name="id2787902"></a>open PANEL as a right-edge panel.
+      </p></dd><dt><a name="id2787908"></a><span class="term"><tt>-R</tt>, </span><span class="term"><tt>--RPC</tt></span></dt><dd><p><a name="id2787919"></a>read and invoke SOAP RPC from standard input (see <a href="#soap" title="Appendix B. SOAP RPC">Appendix B. SOAP RPC</a>).
+      </p></dd><dt><a name="id2787933"></a><span class="term"><tt>-s</tt>, </span><span class="term"><tt>--show=FILE</tt></span></dt><dd><p><a name="id2787944"></a>open a directory showing FILE.
+      </p></dd><dt><a name="id2787950"></a><span class="term"><tt>-t</tt>, </span><span class="term"><tt>--top=PANEL</tt></span></dt><dd><p><a name="id2787962"></a>open PANEL as a top-edge panel.
+      </p></dd><dt><a name="id2787968"></a><span class="term"><tt>-u</tt>, </span><span class="term"><tt>--user</tt></span></dt><dd><p><a name="id2787979"></a>show user name in each window.
+      </p></dd><dt><a name="id2787985"></a><span class="term"><tt>-v</tt>, </span><span class="term"><tt>--version</tt></span></dt><dd><p><a name="id2787996"></a>display the version information and exit.
+      </p></dd><dt><a name="id2788003"></a><span class="term"><tt>-x</tt>, </span><span class="term"><tt>--examine=FILE</tt></span></dt><dd><p><a name="id2788014"></a>FILE has changed; re-examine it.
+      </p></dd></dl></div>
+    </p></div><div class="refsect1"><a name="id2788023"></a><h2><a name="id2788023"></a>NOTES</h2><p>
+     The main documentation for ROX-Filer is available by choosing
+     <span class="guimenuitem">Show ROX-Filer Help</span> from the
+     popup menu, or by clicking on the <span class="guibutton">i</span>
+     toolbar icon.
+    </p></div><div class="refsect1"><a name="id2788050"></a><h2><a name="id2788050"></a>LICENSE</h2><p>Copyright (C) 2002 Thomas Leonard.
+     </p><p>
+     You may redistribute copies of ROX-Filer under the terms of the GNU General
+     Public License.
+    </p></div><div class="refsect1"><a name="id2788066"></a><h2><a name="id2788066"></a>BUGS</h2><p>
+     Report bugs to <tt>&lt;<a href="mailto:tal197@users.sourceforge.net">tal197@users.sourceforge.net</a>&gt;</tt>.
+    </p></div><div class="refsect1"><a name="id2788082"></a><h2><a name="id2788082"></a>AUTHORS</h2><p>
+     ROX-Filer was created by Thomas Leonard, with help from:
+     </p><p>
+     <table class="simplelist" border="0" summary="Simple list"><tr><td>Christopher Arndt</td><td>Couderc Damien</td><td>James Kermode</td><td>Jimmy Olgeni</td></tr><tr><td>Jens Askengren</td><td>Andreas Dehmel</td><td>Jim Knoble</td><td>Andy Piper</td></tr><tr><td>Liav Asseraf</td><td>Dmitry Elfimov</td><td>Krzysztof Krzyzaniak</td><td>Marcelo Ramos</td></tr><tr><td>Wilbert Berendsen</td><td>Mattias Engdegard</td><td>Vincent Ledda</td><td>Michel Alexandre Salim</td></tr><tr><td>Francesco Bochicchio</td><td>Andrew Flegg</td><td>Vincent Lefevre</td><td>Chris Sawer</td></tr><tr><td>Andrzej Borsuk</td><td>Olivier Fourdan</td><td>Victor Liu See-le</td><td>Taras</td></tr><tr><td>Richard Boulton</td><td>Eric Gillespie</td><td>Anders Lundmark</td><td>Simon Truss</td></tr><tr><td>Simon Britnell</td><td>Thierry Godefroy</td><td>Jose Romildo Malaquias</td><td>Jan Wagemakers</td></tr><tr><td>Arnaud Calvo</td><td>Alex Holden</td><td>Denis Manente</td><td>Stephen Watson</td></tr><tr><td>Andrew Clover</td><td>Jasper Huijsmans</td><td>Andras Mohari</td><td>Andre Wyrwa</td></tr><tr><td>Fabien Coutant</td><td>Bernard Jungen</td><td>Christiansen Merel</td><td>Diego Zamboni</td></tr></table>
+     </p><p>
+     and many others; the 
+    `<tt class="filename">Changes</tt>'
+   file contains more
+     detailed information!
+    </p></div></div></div><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="soap"></a>Appendix B. SOAP RPC</h2></div></div><p>When the filer starts you can use command-line options to control its behaviour.
+   As an alternative to this, the filer allows you to specify an operation with a
+   [<a href="#id2789091">SOAP</a>] RPC format message. In fact, if you use the command-line options,
+   the filer converts to SOAP RPC internally.
+  </p><p>All SOAP RPC messages are passed on standard input, like this:
+
+   <pre class="screen">
+    $ rox --RPC &lt;&lt; EOF
+    &lt;?xml version=&quot;1.0&quot;?&gt;
+    &lt;env:Envelope xmlns:env=&quot;http://www.w3.org/2001/12/soap-envelope&quot;&gt;
+    &lt;env:Body xmlns=&quot;http://rox.sourceforge.net/SOAP/ROX-Filer&quot;&gt;
+    &lt;Panel&gt;
+    &lt;Name&gt;Default&lt;/Name&gt;
+    &lt;Side&gt;Bottom&lt;/Side&gt;
+    &lt;/Panel&gt;
+    &lt;/env:Body&gt;
+    &lt;/env:Envelope&gt;
+    EOF</pre>
+
+   The following methods are recognised:</p><div class="itemizedlist"><ul><li><p><a name="id2788354"></a><span class="function">Version</span>()
+     Returns the filer's version.
+   </p></li><li><p><a name="id2788366"></a><span class="function">CloseDir</span>(<span class="parameter">Filename</span>)
+     Close directory <span class="parameter">Filename</span> and all its subdirectories.
+   </p></li><li><p><a name="id2788391"></a><span class="function">Examine</span>(<span class="parameter">Filename</span>)
+     <span class="parameter">Filename</span> may have changed &#8212; check it and
+     update the display.
+   </p></li><li><p><a name="id2788417"></a><span class="function">OpenDir</span>(<span class="parameter">Filename</span>)
+     Open a window showing directory <span class="parameter">Filename</span>.
+   </p></li><li><p><a name="id2788441"></a><span class="function">Panel</span>(<span class="parameter">Side</span>,
+     [<span class="parameter">Name</span>])
+     Open the panel named <span class="parameter">Name</span> on screen side
+     <span class="parameter">Side</span> (<b><tt>Top</tt></b>|<b><tt>Bottom</tt></b>|<b><tt>Left</tt></b>|<b><tt>Right</tt></b>).
+     <span class="parameter">Name</span> can be a name in Choices (eg,
+     <b><tt>MyPanel</tt></b>) or a full pathname.
+     If not given, the panel on that side is turned off.
+   </p></li><li><p><a name="id2788523"></a><span class="function">Pinboard</span>([<span class="parameter">Name</span>])
+     Display pinboard <span class="parameter">Name</span> on the desktop background.
+     <span class="parameter">Name</span> can be a name in Choices (eg,
+     <b><tt>MyPinboard</tt></b>) or a full pathname.
+     If not given, the pinboard is turned off.
+   </p></li><li><p><a name="id2788564"></a><span class="function">Run</span>(<span class="parameter">Filename</span>)
+     Run <span class="parameter">Filename</span> as if it was clicked on in the filer.
+   </p></li><li><p><a name="id2788589"></a><span class="function">Show</span>(<span class="parameter">Directory</span>,
+     <span class="parameter">Leafname</span>)
+     Open <span class="parameter">Directory</span> and flash the file
+     <span class="parameter">Leafname</span> inside it.
+   </p></li><li><p><a name="id2788627"></a><span class="function">FileType</span>(<span class="parameter">Filename</span>)
+     Returns the MIME-type of <span class="parameter">Filename</span> (by writing the
+     SOAP response to standard output).
+   </p></li></ul></div><p>
+   The following calls can be used to start new file actions.
+   <span class="parameter">Quiet</span> can be <b><tt>true</tt></b> if the
+   operation should start immediately, instead of waiting for the user to
+   confirm. If <b><tt>false</tt></b>, the user must always confirm. If
+   not given, the default setting is used.
+  </p><div class="itemizedlist"><ul><li><p><a name="id2788686"></a><span class="function">Copy</span>(<span class="parameter">From</span>,
+     <span class="parameter">To</span>, [<span class="parameter">Leafname</span>,
+     <span class="parameter">Quiet</span>])
+     Copy each file in the array <span class="parameter">From</span> to the directory
+     <span class="parameter">To</span>. If <span class="parameter">Leafname</span> is given
+     then <span class="parameter">From</span> should contain a single entry only;
+     <span class="parameter">Leafname </span> gives the new leafname.
+   </p></li><li><p><a name="id2788760"></a><span class="function">Move</span>(<span class="parameter">From</span>,
+     <span class="parameter">To</span>, [<span class="parameter">Leafname</span>,
+     <span class="parameter">Quiet</span>])
+     Move each file in the array <span class="parameter">From</span> to the directory
+     <span class="parameter">To</span>. If <span class="parameter">Leafname</span> is given
+     then <span class="parameter">From</span> should contain a single entry only;
+     <span class="parameter">Leafname</span> gives the new leafname.
+   </p></li><li><p><a name="id2788835"></a><span class="function">Link</span>(<span class="parameter">From</span>,
+     <span class="parameter">To</span>, [<span class="parameter">Leafname</span>])
+     Symlink each file in the array <span class="parameter">From</span> to the
+     directory <span class="parameter">To</span>. If <span class="parameter">Leafname</span> is
+     given then <span class="parameter">From</span> should contain a single entry only;
+     <span class="parameter">Leafname</span> gives the new leafname.
+   </p></li><li><p><a name="id2788902"></a><span class="function">Mount</span>(<span class="parameter">MountPoints</span>,
+     [<span class="parameter">OpenDir</span>, <span class="parameter">Quiet</span>])
+     Mount each directory in the list <span class="parameter">MountPoints</span>. If
+     <b><tt>true</tt></b>, <span class="parameter">OpenDir</span> causes each
+     directory to be opened once it is mounted.
+   </p></li></ul></div></div><div id="id2788958" class="bibliography"><div class="titlepage"><div><h2 class="title"><a name="id2788958"></a>References</h2></div></div><div id="id2788964" class="bibliomixed"><a name="id2788964"></a><p>
+   <span class="citetitle"><i>The ROX desktop,
+    <a href="http://rox.sourceforge.net" target="_top">http://rox.sourceforge.net</a></i></span>
+  </p></div><div id="id2788980" class="bibliomixed"><a name="id2788980"></a><p>
+   <span class="citetitle"><i>RISC OS,
+    <a href="http://www.riscos.com" target="_top">http://www.riscos.com</a></i></span>
+  </p></div><div id="id2788996" class="bibliomixed"><a name="id2788996"></a><p>
+   <span class="citetitle"><i>GTK+ Toolkit,
+    <a href="http://www.gtk.org" target="_top">http://www.gtk.org</a></i></span>
+  </p></div><div id="id2789011" class="bibliomixed"><a name="id2789011"></a><p>
+   <span class="citetitle"><i>The GNOME desktop,
+    <a href="http://www.gnome.org" target="_top">http://www.gnome.org</a></i></span>
+  </p></div><div id="id2789027" class="bibliomixed"><a name="id2789027"></a><p>
+   <span class="citetitle"><i>The Drag and Drop protocol,
+    <a href="http://www.newplanetsoftware.com/xdnd/" target="_top">http://www.newplanetsoftware.com/xdnd/</a></i></span>
+  </p></div><div id="id2789043" class="bibliomixed"><a name="id2789043"></a><p>
+   <span class="citetitle"><i>The X Direct Save protocol,
+    <a href="http://www.newplanetsoftware.com/xds/" target="_top">http://www.newplanetsoftware.com/xds/</a></i></span>
+  </p></div><div id="id2789059" class="bibliomixed"><a name="id2789059"></a><p>
+   <span class="citetitle"><i>The ROX Choices system,
+    <a href="http://rox.sourceforge.net/choices.php3" target="_top">http://rox.sourceforge.net/choices.php3</a></i></span>
+  </p></div><div id="id2789075" class="bibliomixed"><a name="id2789075"></a><p>
+   <span class="citetitle"><i>AVFS - A Virtual File System,
+    <a href="http://sourceforge.net/projects/avf/" target="_top">http://sourceforge.net/projects/avf/</a></i></span>
+  </p></div><div id="id2789091" class="bibliomixed"><a name="id2789091"></a><p>
+   <span class="citetitle"><i>Simple Object Access Protocol (SOAP) 1.2
+    <a href="http://www.w3.org/TR/SOAP/" target="_top">http://www.w3.org/TR/SOAP/</a></i></span>
+  </p></div><div id="id2789108" class="bibliomixed"><a name="id2789108"></a><p>
+   <span class="citetitle"><i>Thumbnail Managing Standard (Version 0.5)
+    <a href="http://triq.net/~pearl/thumbnail-spec/" target="_top">http://triq.net/~pearl/thumbnail-spec/</a></i></span>
+  </p></div></div></div></body></html>

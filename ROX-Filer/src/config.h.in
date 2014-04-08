@@ -1,0 +1,56 @@
+/* The configure script will auto-generate config.h from config.h.in */
+
+#define PROJECT "ROX-Filer"
+#define VERSION "Unknown"
+
+#undef STDC_HEADERS
+#undef HAVE_SYS_UCRED_H
+#undef HAVE_MNTENT_H
+#undef HAVE_SYS_MNTENT_H
+#undef HAVE_FCNTL_H
+#undef HAVE_GETOPT_LONG
+#undef HAVE_UNSETENV
+#undef FILE_B_FLAG
+#undef HAVE_LIBVFS
+#undef HAVE_VFS_H
+#undef HAVE_ICONV_H
+#undef HAVE_LIBPNG
+
+#undef GTK2
+#undef LARGE_FILE_SUPPORT
+
+#undef HAVE_REGEX_H
+
+#include "my_vfs.h"
+#include "rox_gettext.h"
+
+#define _(String) rox_gettext(String)
+
+/* Short for gettext_noop() - marks a string as translatable without
+ * actually translating it at that point. Used by xgettext.
+ */
+#define N_(String) (String)
+
+#ifdef GTK2
+# define GTK_WINDOW_DIALOG GTK_WINDOW_TOPLEVEL
+# define G_DISABLE_CONST_RETURNS
+#else
+# define gdk_x11_xatom_to_atom(x) (x)
+# define gdk_x11_atom_to_xatom(x) (x)
+#endif
+
+/* printf format string to print file sizes */
+#ifdef LARGE_FILE_SUPPORT
+# define SIZE_FMT "lld"
+#else
+# define SIZE_FMT "ld"
+#endif
+
+/* Undefine THUMBS_USE_LIBPNG if you want thumbnail saving support
+ * under GTK+ 2.0 only.
+ */
+#if !defined(GTK2) && defined(HAVE_LIBPNG)
+# define THUMBS_USE_LIBPNG
+#endif
+
+/* #define GTK_DISABLE_DEPRECATED */
