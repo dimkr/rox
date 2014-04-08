@@ -809,7 +809,7 @@ else
     fi
   done
   IFS="$ac_save_ifs"
-  test -z "$ac_cv_prog_XML_CONFIG" && ac_cv_prog_XML_CONFIG="xml-config"
+  test -z "$ac_cv_prog_XML_CONFIG" && ac_cv_prog_XML_CONFIG="xml2-config"
 fi
 fi
 XML_CONFIG="$ac_cv_prog_XML_CONFIG"
