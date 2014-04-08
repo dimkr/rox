@@ -344,7 +344,7 @@ void menu_init(void)
 	gtk_signal_connect(GTK_OBJECT(filer_file_menu), "unmap_event",
 			GTK_SIGNAL_FUNC(menu_closed), NULL);
 
-	option_add_string("menu_xterm", "xterm", NULL);
+	option_add_string("menu_xterm", XTERM, NULL);
 	option_add_int("menu_iconsize", MIS_SMALL, NULL);
 	option_add_saver(save_menus);
 
@@ -1505,7 +1505,7 @@ static void new_window(gpointer data, guint action, GtkWidget *widget)
 static void su_to_user(GtkWidget *dialog)
 {
 	char		*argv[] = {
-		"xterm", "-e", "su_rox", "USER", "APP_RUN", "DIR", NULL};
+		XTERM, "-e", "su_rox", "USER", "APP_RUN", "DIR", NULL};
 	GtkEntry	*user;
 	guchar  	*path;
 	
