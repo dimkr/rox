@@ -21,6 +21,7 @@ extern GFSCache *pixmap_cache;
 extern MaskedPixmap *im_error;
 extern MaskedPixmap *im_unknown;
 extern MaskedPixmap *im_symlink;
+extern MaskedPixmap *im_dir;
 
 extern MaskedPixmap *im_unmounted;
 extern MaskedPixmap *im_mounted;

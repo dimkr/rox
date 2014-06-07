@@ -578,6 +578,11 @@ MaskedPixmap *type_to_icon(MIME_type *type)
 		return im_unknown;
 	}
 
+	if (type == special_directory) {
+		pixmap_ref(im_dir);
+		return im_dir;
+	}
+
 	now = time(NULL);
 	/* Already got an image? */
 	if (type->image)

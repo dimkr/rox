@@ -82,6 +82,7 @@ static const char * bad_xpm[] = {
 MaskedPixmap *im_error;
 MaskedPixmap *im_unknown;
 MaskedPixmap *im_symlink;
+MaskedPixmap *im_dir;
 
 MaskedPixmap *im_unmounted;
 MaskedPixmap *im_mounted;
@@ -149,6 +150,7 @@ static void load_default_pixmaps(void)
 	im_error = load_pixmap("pixmaps/error.xpm");
 	im_unknown = load_pixmap("pixmaps/unknown.xpm");
 	im_symlink = load_pixmap("pixmaps/symlink.xpm");
+	im_dir = load_pixmap("pixmaps/dir.xpm");
 
 	im_unmounted = load_pixmap("pixmaps/mount.xpm");
 	im_mounted = load_pixmap("pixmaps/mounted.xpm");
