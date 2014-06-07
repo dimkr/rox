@@ -99,7 +99,7 @@ typedef enum {
 	TEXT_BG_SOLID = 2,
 } TextBgType;
 
-TextBgType o_text_bg = TEXT_BG_SOLID;
+TextBgType o_text_bg = TEXT_BG_OUTLINE;
 gboolean o_clamp_icons = TRUE;
 static int o_grid_step = GRID_STEP_COARSE;
 static int old_x, old_y;		/* For dragging (mouse start) */
@@ -176,10 +176,10 @@ static void pinboard_load_from_xml(xmlDocPtr doc);
 
 void pinboard_init(void)
 {
-	option_add_string("pinboard_fg_colour", "#000", NULL);
-	option_add_string("pinboard_bg_colour", "#ddd", NULL);
+	option_add_string("pinboard_fg_colour", "#fff", NULL);
+	option_add_string("pinboard_bg_colour", "#000", NULL);
 
-	option_add_int("pinboard_text_bg", TEXT_BG_SOLID, NULL);
+	option_add_int("pinboard_text_bg", TEXT_BG_OUTLINE, NULL);
 	option_add_int("pinboard_clamp_icons", 1, NULL);
 	option_add_int("pinboard_grid_step", GRID_STEP_COARSE, NULL);
 	option_add_notify(pinboard_check_options);
