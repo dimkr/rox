@@ -180,11 +180,13 @@ void type_init(void)
 #ifdef HAVE_LIBMAGIC
 	/* open the magic database */
 	g_cookie = magic_open(MAGIC_MIME_TYPE);
-	if (-1 == magic_load(g_cookie, NULL)) {
-		magic_close(g_cookie);
-		g_cookie = NULL;
-	} else {
-		gtk_quit_add(0, &close_magic, NULL);
+	if (NULL != g_cookie) {
+		if (-1 == magic_load(g_cookie, NULL)) {
+			magic_close(g_cookie);
+			g_cookie = NULL;
+		} else {
+			gtk_quit_add(0, &close_magic, NULL);
+		}
 	}
 #endif
 }
