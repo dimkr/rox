@@ -32,6 +32,10 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+# ifdef HAVE_LIBMAGIC
+#  include <magic.h>
+# endif
+ 
 #ifdef HAVE_REGEX_H
 # include <regex.h>
 #endif
@@ -68,6 +72,10 @@ typedef struct pattern {
 #endif
 
 static gboolean	o_display_colour_types = TRUE;
+
+#ifdef HAVE_LIBMAGIC
+static magic_t g_cookie = NULL;
+#endif
 
 /* Colours for file types (same order as base types) */
 static gchar *opt_type_colours[][2] = {
@@ -125,6 +133,13 @@ MIME_type *special_char_dev;
 MIME_type *special_exec;
 MIME_type *special_unknown;
 
+#ifdef HAVE_LIBMAGIC
+gint close_magic(gpointer data) {
+	magic_close(g_cookie);
+	return 0;
+}
+#endif
+
 void type_init(void)
 {
 	int		i;
@@ -161,6 +176,17 @@ void type_init(void)
 	alloc_type_colours();
 
 	option_add_notify(alloc_type_colours);
+
+#ifdef HAVE_LIBMAGIC
+	/* open the magic database */
+	g_cookie = magic_open(MAGIC_MIME_TYPE);
+	if (-1 == magic_load(g_cookie, NULL)) {
+		magic_close(g_cookie);
+		g_cookie = NULL;
+	} else {
+		gtk_quit_add(0, &close_magic, NULL);
+	}
+#endif
 }
 
 /* Returns the MIME_type structure for the given type name. It is looked
@@ -435,7 +461,9 @@ MIME_type *type_from_path(char *path)
 	GList *patt;
 	int len;
 #endif
-
+#ifdef HAVE_LIBMAGIC
+	const char *name;
+#endif
 	leafname = strrchr(path, '/');
 	if (!leafname)
 		leafname = path;
@@ -475,6 +503,25 @@ MIME_type *type_from_path(char *path)
 	}
 #endif
 
+#ifdef HAVE_LIBMAGIC
+	/* if the magic database could not be opened, report failure */
+	if (NULL == g_cookie)
+		return NULL;
+
+	/* query the database */
+	name = magic_file(g_cookie, path);
+	if (NULL != name) {
+		/* cache the result - next time, use the extension */
+		ext = strchr(leafname, '.');
+		if (NULL != ext) {
+			++ext;
+			if ('\0' != ext)
+				add_ext(name, ext);
+		}
+
+		return get_mime_type((const gchar *) name, TRUE);
+	}
+#endif
 	return NULL;
 }
 

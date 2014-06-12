@@ -621,6 +621,7 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+LIBMAGIC
 LIBPNG
 VFS_LIBS
 VFS_CFLAGS
@@ -4306,6 +4307,62 @@ $as_echo "$png" >&6; }
     $as_echo "#define HAVE_LIBPNG 1" >>confdefs.h
 
   fi
+fi
+
+
+magic=yes
+ac_fn_c_check_header_mongrel "$LINENO" "magic.h" "ac_cv_header_magic_h" "$ac_includes_default"
+if test "x$ac_cv_header_magic_h" = xyes; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for magic_file in -lmagic" >&5
+$as_echo_n "checking for magic_file in -lmagic... " >&6; }
+if ${ac_cv_lib_magic_magic_file+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lmagic -lmagic -lz $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char magic_file ();
+int
+main ()
+{
+return magic_file ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_magic_magic_file=yes
+else
+  ac_cv_lib_magic_magic_file=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_magic_magic_file" >&5
+$as_echo "$ac_cv_lib_magic_magic_file" >&6; }
+if test "x$ac_cv_lib_magic_magic_file" = xyes; then :
+  LIBMAGIC="-lmagic -lz"
+else
+  magic=no
+fi
+
+else
+  magic=no
+fi
+
+
+if test "$magic" = yes; then
+   $as_echo "#define HAVE_LIBMAGIC 1" >>confdefs.h
+
 fi
 
 

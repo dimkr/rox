@@ -15,6 +15,7 @@
 #undef HAVE_VFS_H
 #undef HAVE_ICONV_H
 #undef HAVE_LIBPNG
+#undef HAVE_LIBMAGIC
 
 #undef GTK2
 #undef LARGE_FILE_SUPPORT

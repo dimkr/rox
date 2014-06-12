@@ -246,4 +246,14 @@ int main(int argc, char **argv)
 fi
 AC_SUBST(LIBPNG)
 
+dnl Check for libmagic
+magic=yes
+AC_CHECK_HEADER(magic.h,
+  [AC_CHECK_LIB(magic, magic_file, LIBMAGIC="-lmagic -lz", magic=no, -lmagic -lz)],
+  magic=no)
+if test "$magic" = yes; then
+   AC_DEFINE(HAVE_LIBMAGIC)
+fi
+AC_SUBST(LIBMAGIC)
+
 AC_OUTPUT(Makefile)

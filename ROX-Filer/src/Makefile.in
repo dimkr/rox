@@ -7,7 +7,7 @@ srcdir = @srcdir@
 PLATFORM = @with_platform@
 XTERM = @with_xterm@
 PLATFORM_DIR = ../${PLATFORM}
-LIBS = @LIBS@ @GDK_PIXBUF_LIBS@ `${XML_CONFIG} --libs` @LIBPNG@ -lICE -lSM
+LIBS = @LIBS@ @GDK_PIXBUF_LIBS@ `${XML_CONFIG} --libs` @LIBPNG@ @LIBMAGIC@ -lSM -lICE
 .SUFFIXES:
 .SUFFIXES: .c .o
 
